@@ -1,0 +1,21 @@
+stages:
+  - build
+  - test
+
+build:
+  image: nuwa24/epitech-c
+  stage: build
+  script:
+    - mkdir build && cd build
+    - cmake ../
+    - make
+  artifacts:
+    paths:
+      - build
+
+test:
+  stage: test
+  image: nuwa24/epitech-c
+  script:
+    - cd build/test
+    - ./test_my_rpg
