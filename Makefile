@@ -7,7 +7,7 @@
 
 CC = gcc
 
-CFLAGS += -W -Wall -pedantic -Iinclude/ -Llib
+CFLAGS += -W -Wall -pedantic -Iinclude/ -Llib -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window -g
 
 LDFLAGS += -lmy
 

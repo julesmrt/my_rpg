@@ -5,7 +5,7 @@
 ** my_rpg
 */
 
-#include "my_rpg.h"
+#include "../include/my_rpg.h"
 
 int my_rpg(void)
 {
