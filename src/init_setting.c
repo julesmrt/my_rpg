@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_rpg.c
+** innit_setting.c
 ** File description:
 ** my_rpg
 */

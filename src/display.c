@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_rpg.c
+** display.c
 ** File description:
 ** my_rpg
 */
@@ -11,10 +11,10 @@
 #include <SFML/System/Time.h>
 #include <SFML/Audio.h>
 #include "../include/my_rpg.h"
-#include <stdio.h>
 
-void event(sfEvent event, setting_t *setting)
+void display(setting_t *setting, graphic_t *graphic)
 {
-    if (sfEvtKeyPressed)
-        return check_quit(setting);
+    sfRenderWindow_clear(WINDOW, sfBlack);
+    sfRenderWindow_drawSprite(WINDOW,graphic->sprite->sprite_background, NULL);
+    sfRenderWindow_display(WINDOW);
 }

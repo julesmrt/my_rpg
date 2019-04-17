@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** my_rpg.c
+** main.c
 ** File description:
 ** my_rpg
 */
@@ -17,11 +17,14 @@
 int main(int ac, char *av[])
 {
     setting_t *setting = init_setting();
-    
+    graphic_t *graphic = init_graphic(setting);
+
     while (sfRenderWindow_isOpen(WINDOW)) {
         while (sfRenderWindow_pollEvent(setting->renderWindow, &setting->events)) {
             event(setting->events, setting);
         }
+        display(setting, graphic);
     }
+    destroy(setting);
     return 0;
 }
