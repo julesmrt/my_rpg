@@ -22,6 +22,7 @@ setting_t *init_setting(void)
     setting->scrwidth = 1280;
     sfVideoMode mode = {setting->scrwidth, setting->scrheight, 32};
     WINDOW = sfRenderWindow_create(mode, "Rpg", sfTitlebar , NULL);
+    setting->screen = MENU;
 
     return setting; 
 }

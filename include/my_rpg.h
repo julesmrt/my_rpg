@@ -15,12 +15,31 @@
 #define my_rpg_HEADER_H_
 #define WINDOW  (setting->renderWindow)
 
+typedef enum menu {
+
+    PLAY,
+    OPTIONS,
+    LEAVE,
+
+} menu_t;
+
+typedef enum game {
+
+    MENU,
+    GAME,
+
+} game_t;
+
 typedef struct setting
 {
     sfRenderWindow *renderWindow;
     int scrwidth;
     int scrheight;
     sfEvent events;
+    menu_t *menu;
+    int option;
+    game_t *game;
+    int screen;
     
 } setting_t;
 
@@ -38,10 +57,22 @@ typedef struct texture
 
 } texture_t;
 
+typedef struct word
+{
+
+    sfFont *font;
+    sfText **text;
+    float text_x;
+    float text_y;
+    sfFloatRect *glob_rect;
+
+} word_t;
+
 typedef struct graphic
 {
     texture_t *texture;
     sprite_t *sprite;
+    word_t *word;
 
 } graphic_t;
 
@@ -65,8 +96,10 @@ texture_t *create_texture(void);
 
 //graphic.c
 graphic_t *init_graphic(setting_t *setting);
+word_t *create_word(setting_t *setting);
 
 //diplay.c
+void display_menu(setting_t *setting, graphic_t *graphic);
 void display(setting_t *setting, graphic_t *graphic);
 
 #endif

@@ -19,7 +19,7 @@ texture_t *create_texture(void)
     texture_t *texture = malloc(sizeof(texture_t));
 
     texture->background = sfTexture_createFromFile
-    ("assets/menu/white_walker.jpg", NULL);
+    ("assets/menu/background.jpg", NULL);
     texture->rules = sfTexture_createFromFile
     ("assets/menu/rules.png", NULL);
 
