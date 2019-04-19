@@ -23,6 +23,8 @@ setting_t *init_setting(void)
     sfVideoMode mode = {setting->scrwidth, setting->scrheight, 32};
     WINDOW = sfRenderWindow_create(mode, "Rpg", sfTitlebar , NULL);
     setting->screen = MENU;
+    setting->menu_music = sfMusic_createFromFile("assets/musics/menu_music.ogg");
+    setting->on_off = ON;
 
     return setting; 
 }

@@ -16,7 +16,22 @@
 #include <stdio.h>
 #include "../include/my_rpg.h"
 
+void create_setting(setting_t *setting, word_t *word)
+{
+    const char *text[] = {"back to menu", "sound on", "sound off", NULL};
+    word->text_setting = malloc(sizeof(sfText *) * 3);
+    word->setting_rect = malloc(sizeof(sfFloatRect) * 3);
 
+    for (int i = 0; text[i] != NULL; i++, word->text_y -= 125) {
+        word->text_setting[i] = sfText_create();
+        sfText_setString(word->text_setting[i], text[i]);
+        sfText_setFont(word->text_setting[i], word->font);
+        sfText_setPosition(word->text_setting[i], (sfVector2f) {word->text_x - 100, word->text_y});
+        sfText_setCharacterSize(word->text_setting[i], 100.0);
+        sfText_setColor(word->text_setting[i], sfRed);
+        word->setting_rect[i] = sfText_getGlobalBounds(word->text_setting[i]);
+    }
+}
 
 word_t *create_word(setting_t *setting)
 {
@@ -37,6 +52,8 @@ word_t *create_word(setting_t *setting)
         sfText_setColor(word->text[i], sfRed);
         word->glob_rect[i] = sfText_getGlobalBounds(word->text[i]);
     }
+    word->text_y = word->text_y + 125 * 3;
+    create_setting(setting, word);
 
     return word;
 }

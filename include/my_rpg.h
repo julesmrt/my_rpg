@@ -32,6 +32,15 @@ typedef enum game {
 
 } game_t;
 
+typedef enum menu_music {
+
+    OFF = 2,
+    ON = 1,
+    BACK = 0,
+
+
+} menu_music_t;
+
 
 typedef struct sprite
 {
@@ -50,9 +59,11 @@ typedef struct word
 
     sfFont *font;
     sfText **text;
+    sfText **text_setting;
     float text_x;
     float text_y;
     sfFloatRect *glob_rect;
+    sfFloatRect *setting_rect;
 
 } word_t;
 
@@ -74,8 +85,13 @@ typedef struct setting
     int option;
     game_t *game;
     int screen;
+    int setting;
     graphic_t *graphic;
     sfVector2i mouse_pos;
+    sfMusic *menu_music;
+    int on_off;
+    int music_is_running;
+    menu_music_t *menu_mus;
 
 } setting_t;
 
@@ -106,5 +122,10 @@ word_t *create_word(setting_t *setting);
 //diplay.c
 void display_menu(setting_t *setting, graphic_t *graphic);
 void display(setting_t *setting, graphic_t *graphic);
+void display_setting(setting_t *setting, graphic_t *graphic);
+void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
+
+//sound.c
+void menu_music(setting_t *setting);
 
 #endif

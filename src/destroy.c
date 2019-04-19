@@ -17,6 +17,7 @@
 void destroy(setting_t *setting)
 {
     sfRenderWindow_close(setting->renderWindow);
+    sfMusic_destroy(setting->menu_music);
     exit(0);
 }
 
