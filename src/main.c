@@ -21,7 +21,7 @@ int main(int ac, char *av[])
 
     while (sfRenderWindow_isOpen(WINDOW)) {
         while (sfRenderWindow_pollEvent(setting->renderWindow, &setting->events)) {
-            event(setting->events, setting);
+            event(setting->events, setting, graphic);
         }
         display(setting, graphic);
     }

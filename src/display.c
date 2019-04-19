@@ -10,6 +10,8 @@
 #include <SFML/System/Export.h>
 #include <SFML/System/Time.h>
 #include <SFML/Audio.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../include/my_rpg.h"
 
 void display_game(setting_t *setting, graphic_t *graphic)
@@ -30,7 +32,11 @@ void display(setting_t *setting, graphic_t *graphic)
     sfRenderWindow_clear(setting->renderWindow, sfBlack);
     if (setting->screen == MENU)
         display_menu(setting, graphic);
-    sfRenderWindow_display(setting->renderWindow);
     if (setting->screen == GAME)
-        display_game(setting, graphic);
+        //display_game(setting, graphic);
+    if (setting->screen == SETTING);
+        display_menu(setting, graphic);
+    if (setting->screen == LEAVE)
+        destroy(setting);
+    sfRenderWindow_display(setting->renderWindow);
 }

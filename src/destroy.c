@@ -10,11 +10,14 @@
 #include <SFML/System/Export.h>
 #include <SFML/System/Time.h>
 #include <SFML/Audio.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "../include/my_rpg.h"
 
 void destroy(setting_t *setting)
 {
-    sfRenderWindow_destroy(setting->renderWindow);
+    sfRenderWindow_close(setting->renderWindow);
+    exit(0);
 }
 
 void check_quit(setting_t *setting)

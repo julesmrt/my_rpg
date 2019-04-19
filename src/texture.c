@@ -20,8 +20,6 @@ texture_t *create_texture(void)
 
     texture->background = sfTexture_createFromFile
     ("assets/menu/background.jpg", NULL);
-    texture->rules = sfTexture_createFromFile
-    ("assets/menu/rules.png", NULL);
 
     return texture;
 }

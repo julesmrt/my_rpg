@@ -24,7 +24,7 @@ word_t *create_word(setting_t *setting)
     word->font = sfFont_createFromFile("assets/font/horror.ttf");
     word->text_x = setting->scrwidth / 2.3;
     word->text_y = setting->scrheight / 2;
-    const char *text[] = {"leave", "option", "play", NULL};
+    const char *text[] = {"leave", "options", "play", NULL};
     word->text = malloc(sizeof(sfText *) * 3);
     word->glob_rect = malloc(sizeof(sfFloatRect) * 3);
 

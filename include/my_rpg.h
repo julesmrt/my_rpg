@@ -17,43 +17,31 @@
 
 typedef enum menu {
 
-    PLAY,
-    OPTIONS,
-    LEAVE,
+    PLAY = 2,
+    OPTIONS = 1,
+    LEAVE = 0,
 
 } menu_t;
 
 typedef enum game {
 
-    MENU,
-    GAME,
+    MENU = 3,
+    GAME = 2,
+    SETTING = 1,
+    EXIT = 0,
 
 } game_t;
 
-typedef struct setting
-{
-    sfRenderWindow *renderWindow;
-    int scrwidth;
-    int scrheight;
-    sfEvent events;
-    menu_t *menu;
-    int option;
-    game_t *game;
-    int screen;
-    
-} setting_t;
 
 typedef struct sprite
 {
     sfSprite *sprite_background;
-    sfSprite *sprite_rules;
 
 } sprite_t;
 
 typedef struct texture
 {
     sfTexture *background;
-    sfTexture *rules;
 
 } texture_t;
 
@@ -76,13 +64,30 @@ typedef struct graphic
 
 } graphic_t;
 
+typedef struct setting
+{
+    sfRenderWindow *renderWindow;
+    int scrwidth;
+    int scrheight;
+    sfEvent events;
+    menu_t *menu;
+    int option;
+    game_t *game;
+    int screen;
+    graphic_t *graphic;
+    sfVector2i mouse_pos;
+
+} setting_t;
+
 int my_rpg(void);
 
 //init_setting.c
 setting_t *init_setting(void);
 
 //event.c
-void event(sfEvent event, setting_t *setting);
+void event(sfEvent event, setting_t *setting, graphic_t *graphic);
+void mouse_menu(sfEvent event, setting_t *setting, graphic_t *graphic);
+void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic);
 
 //destroy.c
 void check_quit(setting_t *setting);
