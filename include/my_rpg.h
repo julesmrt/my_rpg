@@ -25,6 +25,7 @@ typedef enum menu {
 
 typedef enum game {
 
+    GRAPHICS = 4,
     MENU = 3,
     GAME = 2,
     SETTING = 1,
@@ -34,10 +35,10 @@ typedef enum game {
 
 typedef enum menu_music {
 
+    GRAPH_MENU = 3,
     OFF = 2,
     ON = 1,
     BACK = 0,
-
 
 } menu_music_t;
 
@@ -64,6 +65,7 @@ typedef struct word
     float text_y;
     sfFloatRect *glob_rect;
     sfFloatRect *setting_rect;
+    sfFloatRect *graph_rect;
 
 } word_t;
 

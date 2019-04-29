@@ -18,9 +18,9 @@
 
 void create_setting(setting_t *setting, word_t *word)
 {
-    const char *text[] = {"back to menu", "sound on", "sound off", NULL};
-    word->text_setting = malloc(sizeof(sfText *) * 3);
-    word->setting_rect = malloc(sizeof(sfFloatRect) * 3);
+    const char *text[] = {"back to menu", "sound on", "sound off", "puuuuuteuuuu", NULL};
+    word->text_setting = malloc(sizeof(sfText *) * 4);
+    word->setting_rect = malloc(sizeof(sfFloatRect) * 4);
 
     for (int i = 0; text[i] != NULL; i++, word->text_y -= 125) {
         word->text_setting[i] = sfText_create();
@@ -54,6 +54,7 @@ word_t *create_word(setting_t *setting)
     }
     word->text_y = word->text_y + 125 * 3;
     create_setting(setting, word);
+    //create_graphics(setting, word);
 
     return word;
 }

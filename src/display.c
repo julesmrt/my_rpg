@@ -22,9 +22,14 @@ void display_game(setting_t *setting, graphic_t *graphic)
 void display_setting(setting_t *setting, graphic_t *graphic)
 {
     sfRenderWindow_drawSprite(WINDOW,graphic->sprite->sprite_background, NULL);
-    for (int i = 0; i != 3; i++) {
+    for (int i = 0; i != 4; i++) {
         sfRenderWindow_drawText(WINDOW, graphic->word->text_setting[i], NULL);
     }
+    if (setting->setting == GRAPH_MENU) {
+        setting->setting = -1;
+        setting->screen = GRAPHICS;
+    }
+
     if (setting->setting == OFF) {
         sfMusic_pause(setting->menu_music);
         setting->setting = -1;
@@ -37,7 +42,6 @@ void display_setting(setting_t *setting, graphic_t *graphic)
         setting->setting = -1;
         setting->screen = MENU;
     }
-
 }
 
 void display_menu(setting_t *setting, graphic_t *graphic)

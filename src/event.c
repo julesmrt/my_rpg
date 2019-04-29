@@ -18,7 +18,7 @@ void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic)
     int i;
     setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
             if (sfFloatRect_contains(&graphic->word->setting_rect[i], setting->mouse_pos.x, setting->mouse_pos.y) == sfTrue)
                 break;
