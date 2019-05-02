@@ -10,6 +10,7 @@
 #include <SFML/System/Export.h>
 #include <SFML/System/Time.h>
 #include <SFML/Audio.h>
+#include "dev.h"
 
 #ifndef my_rpg_HEADER_H_
 #define my_rpg_HEADER_H_
@@ -94,7 +95,7 @@ typedef struct setting
     int on_off;
     int music_is_running;
     menu_music_t *menu_mus;
-
+    level_t *levels;
 } setting_t;
 
 int my_rpg(void);

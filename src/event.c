@@ -64,6 +64,8 @@ void event(sfEvent event, setting_t *setting, graphic_t *graphic)
 {
     switch(event.type)
     {
+        case (sfEvtClosed):
+            return destroy(setting);
         case (sfEvtKeyPressed):
             return check_quit(setting);
         case (sfEvtMouseMoved):

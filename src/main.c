@@ -17,18 +17,18 @@
 int main(int ac, char *av[])
 {
     setting_t *setting = init_setting();
-    graphic_t *graphic = init_graphic(setting);
-    setting->music_is_running = OFF;
-
-    while (sfRenderWindow_isOpen(WINDOW)) {
-        while (sfRenderWindow_pollEvent(setting->renderWindow, &setting->events)) {
-            event(setting->events, setting, graphic);
-            if (setting->music_is_running == OFF) {
-                menu_music(setting);          
-            }
-        }
-        display(setting, graphic);
-    }
+//    graphic_t *graphic = init_graphic(setting);
+//    setting->music_is_running = OFF;
+//
+//    while (sfRenderWindow_isOpen(WINDOW)) {
+//        while (sfRenderWindow_pollEvent(setting->renderWindow, &setting->events)) {
+//            event(setting->events, setting, graphic);
+//            if (setting->music_is_running == OFF) {
+//                menu_music(setting);
+//            }
+//        }
+//        display(setting, graphic);
+//    }
     destroy(setting);
-    return 0;
+//    return 0;
 }

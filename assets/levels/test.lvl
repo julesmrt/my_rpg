@@ -1,0 +1,15 @@
+name: test_level
+tilesheet: my_horror.png
+enemies: 10
+map:
+WWWWWWWWWWWWWWWWWWWWWWWWWW
+W..X.....................W
+W........................W
+W........................W
+W..E.....................W
+W..............E.........W
+W........................W
+W........................W
+W.............S..........W
+WWWWWWWWWWWWWWWWWWWWWWWWWW
+endmap
