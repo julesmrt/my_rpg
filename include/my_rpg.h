@@ -15,30 +15,59 @@
 #define my_rpg_HEADER_H_
 #define WINDOW  (setting->renderWindow)
 
-typedef enum menu {
 
-    PLAY = 2,
+typedef enum my_screen
+{
+
+    PLAY_SCREEN = 5,
+    MENU_SCREEN = 4,
+    HOW_TO_PLAY_SCREEN = 3,
+    OPT_SCREEN = 2,
+    OPT_GRAPH_SCREEN = 1,
+    OPT_SOUND_SCREEN = 0,
+
+} my_screen_t;
+
+typedef enum menu
+{
+    PLAY = 3,
+    HOW_TO_PLAY = 2,
     OPTIONS = 1,
     LEAVE = 0,
 
 } menu_t;
 
-typedef enum game {
+typedef enum opt
+{
 
-    GRAPHICS = 4,
-    MENU = 3,
-    GAME = 2,
-    SETTING = 1,
-    EXIT = 0,
+    GRAPHIC = 2,
+    SOUND = 1,
+    BACK_TO_MENU = 0,
 
-} game_t;
+} opt_t;
+
+typedef enum graphic_menu
+{
+
+    VERTICAL = 2,
+    FPS = 1,
+    BACK_TO_OPTION_G = 0,
+
+} graphic_menu_t;
+
+typedef enum audio_menu
+{
+
+    INTENSITY = 2,
+    ON_OFF = 1,
+    BACK_TO_OPTION_S = 0,
+
+} audio_menu_t;
 
 typedef enum menu_music {
 
-    GRAPH_MENU = 3,
     OFF = 2,
     ON = 1,
-    BACK = 0,
 
 } menu_music_t;
 
@@ -59,13 +88,10 @@ typedef struct word
 {
 
     sfFont *font;
-    sfText **text;
-    sfText **text_setting;
+    sfText ***text;
     float text_x;
     float text_y;
-    sfFloatRect *glob_rect;
-    sfFloatRect *setting_rect;
-    sfFloatRect *graph_rect;
+    sfFloatRect **glob_rect;
 
 } word_t;
 
@@ -83,9 +109,7 @@ typedef struct setting
     int scrwidth;
     int scrheight;
     sfEvent events;
-    menu_t *menu;
     int option;
-    game_t *game;
     int screen;
     int setting;
     graphic_t *graphic;
@@ -94,6 +118,15 @@ typedef struct setting
     int on_off;
     int music_is_running;
     menu_music_t *menu_mus;
+    menu_t *menu;
+    opt_t *opt;
+    graphic_menu_t *graphic_menu;
+    audio_menu_t *audio_menu;
+    my_screen_t *my_screen;
+    sfBool vertical;
+    unsigned int fps;
+    sfBool music;
+
 
 } setting_t;
 
@@ -104,7 +137,7 @@ setting_t *init_setting(void);
 
 //event.c
 void event(sfEvent event, setting_t *setting, graphic_t *graphic);
-void mouse_menu(sfEvent event, setting_t *setting, graphic_t *graphic);
+void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic);
 
 //destroy.c
@@ -122,12 +155,18 @@ graphic_t *init_graphic(setting_t *setting);
 word_t *create_word(setting_t *setting);
 
 //diplay.c
-void display_menu(setting_t *setting, graphic_t *graphic);
+void display_menu(setting_t *setting, graphic_t *graphic, int j);
 void display(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
+void display_graph(setting_t *setting, graphic_t *graphic);
 
 //sound.c
 void menu_music(setting_t *setting);
+
+void check_setting(setting_t *setting, graphic_t *graphic);
+void check_opt(setting_t *setting, graphic_t *graphic);
+void check_graph(setting_t *setting, graphic_t *graphic);
+void check_sound(setting_t *setting, graphic_t *graphic);
 
 #endif

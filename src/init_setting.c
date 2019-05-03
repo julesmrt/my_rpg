@@ -22,9 +22,14 @@ setting_t *init_setting(void)
     setting->scrwidth = 1280;
     sfVideoMode mode = {setting->scrwidth, setting->scrheight, 32};
     WINDOW = sfRenderWindow_create(mode, "Rpg", sfTitlebar , NULL);
-    setting->screen = MENU;
+    setting->screen = MENU_SCREEN;
     setting->menu_music = sfMusic_createFromFile("assets/musics/menu_music.ogg");
     setting->on_off = ON;
+    setting->setting = -1;
+    setting->vertical = sfFalse;
+    sfRenderWindow_setVerticalSyncEnabled(WINDOW, setting->vertical);
+    setting->fps = 60.0;
+    setting->music = sfTrue;
 
     return setting; 
 }

@@ -13,50 +13,54 @@
 #include "../include/my_rpg.h"
 #include <stdio.h>
 
-void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic)
+int get_screen(setting_t *setting, graphic_t *graphic)
 {
     int i;
-    setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
 
-    for (i = 0; i < 4; i++) {
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
-            if (sfFloatRect_contains(&graphic->word->setting_rect[i], setting->mouse_pos.x, setting->mouse_pos.y) == sfTrue)
-                break;
-        }
+    switch(setting->screen)
+    {
+        case(MENU_SCREEN):
+        i = 0;
+        break;
+        case(OPT_SCREEN):
+        i = 1;
+        break;
+        case(OPT_GRAPH_SCREEN):
+        i = 2;
+        break;
+        case(OPT_SOUND_SCREEN):
+        i = 3;
+        break;
     }
-    setting->setting = i;
+
+    return i;
 }
 
-void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic)
+void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic)
+{
+    setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
+
+    for (int i = 0; i != 4; i++) {
+        for (int j = 0; graphic->word->text[i][j]; j++) {
+            if (sfFloatRect_contains(&graphic->word->glob_rect[i][j], setting->mouse_pos.x, setting->mouse_pos.y)) {
+                sfText_setColor(graphic->word->text[i][j], sfWhite);
+            } else
+                sfText_setColor(graphic->word->text[i][j], sfRed);
+        }
+    }
+}
+
+void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)
 {
     int i;
-    setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
+    setting->mouse_pos = sfMouse_getPosition((sfWindow *) WINDOW);
 
-    for (i = 0; i < 3; i++) {
-        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue) {
-            if (sfFloatRect_contains(&graphic->word->glob_rect[i], setting->mouse_pos.x, setting->mouse_pos.y) == sfTrue)
+    for (i = 0; graphic->word->text[o][i] != NULL; i++) {
+        if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue)
+            if (sfFloatRect_contains(&graphic->word->glob_rect[o][i], setting->mouse_pos.x, setting->mouse_pos.y) == sfTrue) {
+                setting->setting = i;
                 break;
-        }
-    }
-    if (i <= PLAY && i >= LEAVE)
-        setting->screen = i;
-}
-
-void mouse_menu(sfEvent event, setting_t *setting, graphic_t *graphic)
-{
-    setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
-
-    for (int i = 0; i < 3; i++) {
-        if (sfFloatRect_contains(&graphic->word->glob_rect[i], setting->mouse_pos.x, setting->mouse_pos.y)) {
-            sfText_setColor(graphic->word->text[i], sfWhite);
-        } else
-            sfText_setColor(graphic->word->text[i], sfRed);
-    }
-    for (int i = 0; i < 3; i++) {
-        if (sfFloatRect_contains(&graphic->word->setting_rect[i], setting->mouse_pos.x, setting->mouse_pos.y)) {
-            sfText_setColor(graphic->word->text_setting[i], sfWhite);
-        } else
-            sfText_setColor(graphic->word->text_setting[i], sfRed);
+            }
     }
 }
 
@@ -65,15 +69,14 @@ void event(sfEvent event, setting_t *setting, graphic_t *graphic)
     switch(event.type)
     {
         case (sfEvtKeyPressed):
-            return check_quit(setting);
+            check_quit(setting);
+        break;
         case (sfEvtMouseMoved):
-            return mouse_menu(event, setting, graphic);
+            mouse_moved(event, setting, graphic);
+        break;
         case (sfEvtMouseButtonPressed):
-            if(setting->screen == OPTIONS)
-                mouse_click_setting(event, setting, graphic);
-            else
-                return mouse_click(event, setting, graphic);
-
+            mouse_clicked(event, setting, graphic, get_screen(setting, graphic));
+        break;
         default:
             break;
     }

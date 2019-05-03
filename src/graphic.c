@@ -16,20 +16,37 @@
 #include <stdio.h>
 #include "../include/my_rpg.h"
 
-void create_setting(setting_t *setting, word_t *word)
-{
-    const char *text[] = {"back to menu", "sound on", "sound off", "puuuuuteuuuu", NULL};
-    word->text_setting = malloc(sizeof(sfText *) * 4);
-    word->setting_rect = malloc(sizeof(sfFloatRect) * 4);
+    const char *text[][5] = {
+        {"leave", "options", "how to play", "play", NULL},
+        {"back to menu", "sound", "graphical", NULL, NULL},
+        {"back to option", "frame", "vertical", NULL, NULL},
+        {"back to option", "on off", "intensivity", NULL, NULL}
+    };
 
-    for (int i = 0; text[i] != NULL; i++, word->text_y -= 125) {
-        word->text_setting[i] = sfText_create();
-        sfText_setString(word->text_setting[i], text[i]);
-        sfText_setFont(word->text_setting[i], word->font);
-        sfText_setPosition(word->text_setting[i], (sfVector2f) {word->text_x - 100, word->text_y});
-        sfText_setCharacterSize(word->text_setting[i], 100.0);
-        sfText_setColor(word->text_setting[i], sfRed);
-        word->setting_rect[i] = sfText_getGlobalBounds(word->text_setting[i]);
+void give_opt(setting_t *setting, graphic_t *graphic, int i, int j)
+{
+    graphic->word->text[i][j] = sfText_create();
+    sfText_setString(graphic->word->text[i][j], text[i][j]);
+    sfText_setFont(graphic->word->text[i][j], graphic->word->font);
+    sfText_setPosition(graphic->word->text[i][j], (sfVector2f) {graphic->word->text_x, graphic->word->text_y});
+    sfText_setCharacterSize(graphic->word->text[i][j], 100.0);
+    sfText_setColor(graphic->word->text[i][j], sfRed);
+    graphic->word->glob_rect[i][j] = sfText_getGlobalBounds(graphic->word->text[i][j]);
+    graphic->word->text[i][j + 1] = NULL;
+}
+
+void create_text(setting_t *setting, graphic_t *graphic)
+{
+    graphic->word->text = malloc(sizeof(sfText **) * 4);
+    graphic->word->glob_rect = malloc(sizeof(sfFloatRect *) * 5);
+
+    for (int i = 0; i != 4; i++) {
+        graphic->word->text[i] = malloc(sizeof(sfText *) * 5);
+        graphic->word->glob_rect[i] = malloc(sizeof(sfFloatRect) * 5);
+        for (int j = 0; text[i][j] != NULL; j++, graphic->word->text_y -= 125) {
+            give_opt(setting, graphic, i, j);
+        }
+        graphic->word->text_y = graphic->word->text_y + 125 * 3;
     }
 }
 
@@ -39,22 +56,6 @@ word_t *create_word(setting_t *setting)
     word->font = sfFont_createFromFile("assets/font/horror.ttf");
     word->text_x = setting->scrwidth / 2.3;
     word->text_y = setting->scrheight / 2;
-    const char *text[] = {"leave", "options", "play", NULL};
-    word->text = malloc(sizeof(sfText *) * 3);
-    word->glob_rect = malloc(sizeof(sfFloatRect) * 3);
-
-    for (int i = 0; text[i] != NULL; i++, word->text_y -= 125) {
-        word->text[i] = sfText_create();
-        sfText_setString(word->text[i], text[i]);
-        sfText_setFont(word->text[i], word->font);
-        sfText_setPosition(word->text[i], (sfVector2f) {word->text_x, word->text_y});
-        sfText_setCharacterSize(word->text[i], 100.0);
-        sfText_setColor(word->text[i], sfRed);
-        word->glob_rect[i] = sfText_getGlobalBounds(word->text[i]);
-    }
-    word->text_y = word->text_y + 125 * 3;
-    create_setting(setting, word);
-    //create_graphics(setting, word);
 
     return word;
 }
@@ -67,6 +68,7 @@ graphic_t *init_graphic(setting_t *setting)
         return NULL;
     graphic->texture = create_texture();
     graphic->sprite = create_sprite(graphic);
+    create_text(setting, graphic);
     
     return graphic;
 }

@@ -14,55 +14,41 @@
 #include <stdlib.h>
 #include "../include/my_rpg.h"
 
-void display_game(setting_t *setting, graphic_t *graphic)
+void display_menu (setting_t *setting, graphic_t *graphic, int j)
 {
-
-}
-
-void display_setting(setting_t *setting, graphic_t *graphic)
-{
-    sfRenderWindow_drawSprite(WINDOW,graphic->sprite->sprite_background, NULL);
-    for (int i = 0; i != 4; i++) {
-        sfRenderWindow_drawText(WINDOW, graphic->word->text_setting[i], NULL);
-    }
-    if (setting->setting == GRAPH_MENU) {
-        setting->setting = -1;
-        setting->screen = GRAPHICS;
-    }
-
-    if (setting->setting == OFF) {
-        sfMusic_pause(setting->menu_music);
-        setting->setting = -1;
-    }
-    if (setting->setting == ON && sfMusic_getStatus(setting->menu_music) == sfPaused) {
-        sfMusic_play(setting->menu_music);
-        setting->setting = -1;
-    }
-    if (setting->setting == LEAVE) {
-        setting->setting = -1;
-        setting->screen = MENU;
-    }
-}
-
-void display_menu(setting_t *setting, graphic_t *graphic)
-{
-    sfRenderWindow_drawSprite(WINDOW,graphic->sprite->sprite_background, NULL);
-    for (int i = 0; i != 3; i++) {
-        sfRenderWindow_drawText(WINDOW, graphic->word->text[i], NULL);
+    sfRenderWindow_drawSprite(WINDOW, graphic->sprite->sprite_background, NULL);
+    for (int i = 0; graphic->word->text[j][i] != NULL; i++) {
+        sfRenderWindow_drawText(WINDOW, graphic->word->text[j][i], NULL);
     }
 }
 
 void display(setting_t *setting, graphic_t *graphic)
 {
     sfRenderWindow_clear(setting->renderWindow, sfBlack);
-    if (setting->screen == MENU)
-        display_menu(setting, graphic);
-    if (setting->screen == GAME)
-        display_game(setting, graphic);
-    if (setting->screen == SETTING) {
-        display_setting(setting, graphic);
+    switch(setting->screen)
+    {
+        case(MENU_SCREEN):
+            display_menu(setting, graphic, 0);
+            check_setting(setting, graphic);
+            break;
+        case(HOW_TO_PLAY_SCREEN):
+            printf("ok");
+            break;
+        case(OPT_SCREEN):
+            display_menu(setting, graphic, 1);
+            check_opt(setting, graphic);
+            break;
+        case(OPT_GRAPH_SCREEN):
+            display_menu(setting, graphic, 2);
+            check_graph(setting, graphic);
+            break;
+        case(OPT_SOUND_SCREEN):
+            display_menu(setting, graphic, 3);
+            check_sound(setting, graphic);
+            break;
+        default:
+            break;
+
     }
-    if (setting->screen == LEAVE)
-        destroy(setting);
     sfRenderWindow_display(setting->renderWindow);
 }
