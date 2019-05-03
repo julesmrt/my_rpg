@@ -16,9 +16,9 @@
 
 void display_menu (setting_t *setting, graphic_t *graphic, int j)
 {
-    sfRenderWindow_drawSprite(WINDOW, graphic->sprite->sprite_background, NULL);
+    sfRenderWindow_drawSprite(setting->renderWindow, graphic->sprite->sprite_background, NULL);
     for (int i = 0; graphic->word->text[j][i] != NULL; i++) {
-        sfRenderWindow_drawText(WINDOW, graphic->word->text[j][i], NULL);
+        sfRenderWindow_drawText(setting->renderWindow, graphic->word->text[j][i], NULL);
     }
 }
 

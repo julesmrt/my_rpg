@@ -42,7 +42,7 @@ void check_graph(setting_t *setting, graphic_t *graphic)
         }
         else if (setting->vertical == sfTrue)
             setting->vertical = sfFalse;
-        sfRenderWindow_setVerticalSyncEnabled(WINDOW, setting->vertical);
+        sfRenderWindow_setVerticalSyncEnabled(setting->renderWindow, setting->vertical);
         setting->setting = -1;
         break;
         case(FPS):
@@ -77,25 +77,23 @@ void check_opt(setting_t *setting, graphic_t *graphic)
         setting->screen = MENU_SCREEN;
         setting->setting = -1;
         break;
-    } 
+    }
 }
 
 void check_setting(setting_t *setting, graphic_t *graphic)
 {
-    switch(setting->setting)
-    {
+    switch(setting->setting) {
         case(LEAVE):
-        destroy(setting);
-        break;
+            destroy(setting);
+            break;
         case(OPTIONS):
-        setting->screen = OPT_SCREEN;
-        setting->setting = -1;
-        break;
+            setting->screen = OPT_SCREEN;
+            setting->setting = -1;
+            break;
         case(HOW_TO_PLAY):
-        printf("pop");
-        break;
+            break;
         case(PLAY):
-        printf("play");
-        break;
+            printf("play");
+            break;
     }
 }

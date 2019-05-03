@@ -20,11 +20,11 @@ int main(int ac, char *av[])
     graphic_t *graphic = init_graphic(setting);
     setting->music_is_running = OFF;
 
-    while (sfRenderWindow_isOpen(WINDOW)) {
+    while (sfRenderWindow_isOpen(setting->renderWindow)) {
         while (sfRenderWindow_pollEvent(setting->renderWindow, &setting->events)) {
             event(setting->events, setting, graphic);
             if (setting->music_is_running == OFF) {
-                menu_music(setting);          
+                menu_music(setting);
             }
         }
         display(setting, graphic);

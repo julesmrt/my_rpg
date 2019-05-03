@@ -19,6 +19,7 @@
 setting_t *init_setting(void)
 {
     setting_t *setting = malloc(sizeof(setting_t));
+
     setting->scrheight = 960;
     setting->scrwidth = 1280;
     sfVideoMode mode = {setting->scrwidth, setting->scrheight, 32};
@@ -29,9 +30,13 @@ setting_t *init_setting(void)
     setting->on_off = ON;
     setting->setting = -1;
     setting->vertical = sfFalse;
-    sfRenderWindow_setVerticalSyncEnabled(WINDOW, setting->vertical);
+    sfRenderWindow_setVerticalSyncEnabled(setting->renderWindow, setting->vertical);
     setting->fps = 60.0;
     setting->music = sfTrue;
-
+    setting->levels = load_levels();
+    if (setting->levels == NULL)
+        my_printf("Error loading levels\n");
+    else
+        display_levels(setting->levels);
     return setting;
 }

@@ -7,6 +7,7 @@ set(SRC_DIR src)
 
 file(GLOB SRC_FILES ${SRC_DIR}/*.c ${SRC_DIR}/**/*.c)
 file(GLOB LIB_SRC_FILES ${LIB_DIR}/src/**/*.c ${LIB_DIR}/src/*.c)
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 include_directories(
     lib/my/include

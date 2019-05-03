@@ -18,11 +18,10 @@ void menu_music(setting_t *setting)
 {
     if (setting->on_off == ON) {
         setting->on_off = OFF;
-        sfMusic_pause(setting->menu_music);
     }
     else if (setting->on_off == OFF) {
         setting->on_off = ON;
-        sfMusic_play(setting->menu_music);
-        sfMusic_setLoop(setting->menu_music, sfTrue);
+//        sfMusic_play(setting->menu_music);
+//        sfMusic_setLoop(setting->menu_music, sfTrue);
     }
 }

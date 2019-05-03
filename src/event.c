@@ -39,7 +39,7 @@ int get_screen(setting_t *setting, graphic_t *graphic)
 
 void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic)
 {
-    setting->mouse_pos = sfMouse_getPosition((sfWindow*) WINDOW);
+    setting->mouse_pos = sfMouse_getPosition((sfWindow*) setting->renderWindow);
 
     for (int i = 0; i != 4; i++) {
         for (int j = 0; graphic->word->text[i][j]; j++) {
@@ -54,7 +54,7 @@ void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic)
 void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)
 {
     int i;
-    setting->mouse_pos = sfMouse_getPosition((sfWindow *) WINDOW);
+    setting->mouse_pos = sfMouse_getPosition((sfWindow *) setting->renderWindow);
 
     for (i = 0; graphic->word->text[o][i] != NULL; i++) {
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue)
@@ -69,6 +69,8 @@ void event(sfEvent event, setting_t *setting, graphic_t *graphic)
 {
     switch(event.type)
     {
+        case (sfEvtClosed):
+            return destroy(setting);
         case (sfEvtKeyPressed):
             check_quit(setting);
         break;
