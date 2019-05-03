@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include "dev.h"
 #include "my_rpg.h"
 #include <sys/types.h>
 #include <dirent.h>

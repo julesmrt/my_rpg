@@ -5,7 +5,7 @@
 **
 */
 
-#include "dev.h"
+#include "my_rpg.h"
 #include "my.h"
 
 void name_to_lvl(const char *line, char *id, level_t *level, FILE *file)

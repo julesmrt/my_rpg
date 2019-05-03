@@ -5,7 +5,7 @@
 ** display_levels
 */
 
-#include "dev.h"
+#include "my_rpg.h"
 #include "my.h"
 
 void display_levels(level_t *levels)

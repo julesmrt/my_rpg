@@ -6,7 +6,7 @@
 */
 
 #include "my.h"
-#include "dev.h"
+#include "my_rpg.h"
 #include <SFML/Graphics.h>
 #include <stdlib.h>
 

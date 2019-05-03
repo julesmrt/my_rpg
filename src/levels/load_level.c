@@ -5,7 +5,6 @@
 ** load_level
 */
 
-#include "dev.h"
 #include "my.h"
 #include "my_rpg.h"
 #include <stdlib.h>

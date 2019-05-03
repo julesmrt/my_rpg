@@ -5,7 +5,7 @@
 ** song_to_lvl
 */
 
-#include "dev.h"
+#include "my_rpg.h"
 #include "my.h"
 #include <stdlib.h>
 #include <stdio.h>

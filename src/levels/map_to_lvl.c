@@ -5,7 +5,7 @@
 ** add_map_to_level
 */
 
-#include "dev.h"
+#include "my_rpg.h"
 #include "my.h"
 #include <stdlib.h>
 #include <stdio.h>
