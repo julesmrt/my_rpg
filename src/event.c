@@ -16,6 +16,7 @@
 int get_screen(setting_t *setting, graphic_t *graphic)
 {
     int i;
+    setting->mouse_pos = sfMouse_getPosition((sfWindow*) setting->renderWindow);
 
     switch(setting->screen)
     {

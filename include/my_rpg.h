@@ -124,7 +124,7 @@ typedef struct setting
     audio_menu_t *audio_menu;
     my_screen_t *my_screen;
     sfBool vertical;
-    unsigned int fps;
+    float fps;
     sfBool music;
 
 

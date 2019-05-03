@@ -19,6 +19,10 @@ add_library(my STATIC ${LIB_SRC_FILES})
 
 target_link_libraries(my_rpg
         my
+        csfml-graphics
+        csfml-window
+        csfml-system
+        csfml-audio
 )
 
 add_subdirectory(test)
