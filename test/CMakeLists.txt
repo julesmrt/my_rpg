@@ -18,4 +18,8 @@ add_executable(test_my_rpg ${SRC_FILES} ${TEST_SRC_FILES})
 target_link_libraries(test_my_rpg
         my
         criterion
+		csfml-graphics
+		csfml-window
+		csfml-system
+		csfml-audio
 )
