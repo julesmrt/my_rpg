@@ -7,9 +7,9 @@
 
 CC = gcc
 
-CFLAGS += -W -Wall -pedantic -Iinclude/ -Llib -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window -g
+CFLAGS += -W -Wall -Wunusedparamater -pedantic -Iinclude/ -Llib -g
 
-LDFLAGS += -lmy
+LDFLAGS += -lmy -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window
 
 NAME = my_rpg
 
