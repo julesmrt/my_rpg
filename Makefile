@@ -7,7 +7,7 @@
 
 CC = gcc
 
-CFLAGS += -W -Wall -Wunusedparamater -pedantic -Iinclude/ -Llib -g
+CFLAGS += -W -Wall -Wunused-parameter -pedantic -Iinclude/ -Llib -g
 
 LDFLAGS += -lmy -lcsfml-graphics -lcsfml-system -lcsfml-audio -lcsfml-window
 
