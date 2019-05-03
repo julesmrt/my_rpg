@@ -11,7 +11,7 @@
 char *my_trim(const char *src, const char *to_remove)
 {
     int j = 0;
-    char *res = malloc(sizeof(src));
+    char *res = my_empty_char(my_strlen(src));
 
     for (int i = 0; src[i] != '\0'; i++) {
         if (!char_in_str(to_remove, src[i])) {

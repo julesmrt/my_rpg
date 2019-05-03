@@ -17,25 +17,28 @@ static const level_identifier_t identifiers[] =
         { "tilesheet" },
         { "enemies" },
         { "map" },
+        { "song" },
         { NULL }
     };
 
-static const void (*fun[])(const char *line, char *id, level_t *level) =
+static const void (*fun[])(const char *line,
+    char *id, level_t *level, FILE *file) =
     {
-    add_name_to_level,
-    add_tilesheet_to_level,
-    add_enemies_to_level,
-    add_map_to_level,
+    name_to_lvl,
+    tilesheet_to_lvl,
+    enemies_to_lvl,
+    map_to_lvl,
+    song_to_lvl
     };
 
-static void load_level_line(const char *line, level_t *level)
+static void load_level_line(const char *line, level_t *level, FILE *file)
 {
     char *cpy = my_strdup(line);
     char *id = my_strtok(cpy, ":");
 
     for (int i = 0; identifiers[i].name != NULL; i++) {
         if (my_strcmp(identifiers[i].name, id) == 0) {
-            return (*fun[i])(line, id, level);
+            return (*fun[i])(line, id, level, file);
         }
     }
 }
@@ -48,9 +51,9 @@ level_t *load_level(const char *path)
     level_t *res = malloc(sizeof(level_t));
     FILE *file = fopen(path, "r");
 
+    res->amnt_enemies = 0;
     while ((gtl = getline(&buf, &x, file)) > -1) {
-        res->amnt_enemies = 0;
-        load_level_line(buf, res);
+        load_level_line(buf, res, file);
     }
     res->next = NULL;
     fclose(file);

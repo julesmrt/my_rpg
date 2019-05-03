@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
+#include <stdio.h>
 
 #ifndef dev_H_
 #define dev_H_
@@ -39,9 +40,10 @@ level_t *load_level(const char *path);
 char *trim_whitespace(char *src);
 
 void display_levels(level_t *levels);
-void add_map_to_level(const char *line, char *id, level_t *level);
-void add_name_to_level(const char *line, char *id, level_t *level);
-void add_enemies_to_level(const char *line, char *id, level_t *level);
-void add_tilesheet_to_level(const char *line, char *id, level_t *level);
+void map_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void name_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void song_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void enemies_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 
 #endif

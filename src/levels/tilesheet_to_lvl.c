@@ -12,7 +12,7 @@
 
 static const char *src_path = "assets/tilesheet/";
 
-void add_tilesheet_to_level(const char *line, char *id, level_t *level)
+void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file)
 {
     sfTexture *texture = NULL;
     char *filename = my_trim(my_strdup(my_strtok(NULL, ":") + 1), "\n");
