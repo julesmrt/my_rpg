@@ -9,7 +9,7 @@
 #include "my_rpg.h"
 #include <stdlib.h>
 
-static const char *path = "assets/sounds/";
+static const char *path = "assets/musics/";
 
 music_t **load_songs(config_t *songs_config)
 {
