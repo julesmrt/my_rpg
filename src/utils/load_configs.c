@@ -24,7 +24,7 @@ static char **load_value(FILE *file)
     ssize_t ptr_size;
     char **res = NULL;
 
-    while ((gtl = getline(&buf, &x, file)) == -1) {
+    while ((gtl = getline(&buf, &x, file)) > -1) {
         ptr_size = sizeof(*res) * size;
         res = my_realloc(res, ptr_size, ptr_size * (size + 2));
         res[size++] = my_trim(buf, "\n");
@@ -50,8 +50,10 @@ static FILE *get_file(struct dirent *file)
     FILE *temp = NULL;
     char *pa = my_empty_char(my_strlen(path) + my_strlen(file->d_name) + 1);
 
+    pa = my_strcat(pa, path);
+    pa = my_strcat(pa, file->d_name);
     temp = fopen(pa, "r");
-    if (temp == NULL || valid_filename(file->d_name)) {
+    if (temp == NULL || !valid_filename(file->d_name)) {
         free(pa);
         return NULL;
     }
@@ -66,23 +68,25 @@ config_t **load_configs(void)
     FILE *temp_file = NULL;
     DIR *dir = opendir(path);
     config_t **config = NULL;
-    config_t *temp_conf = NULL;
     struct dirent *file_dir = NULL;
 
     if (dir == NULL)
         return NULL;
     while ((file_dir = readdir(dir)) != NULL) {
-        ptr_size = sizeof(*config) * size;
-        config = my_realloc(config, ptr_size, ptr_size * (size + 2));
         temp_file = get_file(file_dir);
         if (temp_file == NULL)
             continue;
-        temp_conf = malloc(sizeof(config_t));
-        temp_conf->values = load_value(temp_file);
-        temp_conf->name = my_strdup(my_strtok(file_dir->d_name, "."));
-        config[size++] = temp_conf;
+        ptr_size = sizeof(*config) * size;
+        config = my_realloc(config, ptr_size, ptr_size * (size + 2));
+        config[size] = malloc(sizeof(config_t));
+        config[size]->values = load_value(temp_file);
+        config[size++]->name = my_strdup(my_strtok(file_dir->d_name, "."));
         fclose(temp_file);
-        config[size] = NULL;
+    }
+    if (config != NULL) {
+        config[size] = malloc(sizeof(config_t));
+        config[size]->name = NULL;
+        config[size]->values = NULL;
     }
     closedir(dir);
     return config;

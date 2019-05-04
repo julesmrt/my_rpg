@@ -70,6 +70,11 @@ typedef struct texture {
     sfText *who;
 } texture_t;
 
+typedef struct my_texture {
+    sfTexture *ptr;
+    char *name;
+} my_texture_t;
+
 typedef struct word {
     sfFont *font;
     sfText ***text;
@@ -112,7 +117,7 @@ typedef struct config {
     char **values;
 } config_t;
 
-typedef struct my_music {
+typedef struct music {
     char *name;
     sfMusic *ptr;
 } music_t;
@@ -140,6 +145,7 @@ typedef struct setting {
     float fps;
     sfBool music;
     level_t *levels;
+    my_texture_t **textures;
     config_t **config;
 } setting_t;
 
@@ -148,8 +154,6 @@ level_t *load_level(const char *path);
 level_t *get_level(setting_t *settings, const char *name);
 
 char *trim_whitespace(char *src);
-
-char **get_config(const char *name, setting_t *setting);
 
 int my_rpg(void);
 
@@ -160,12 +164,12 @@ void destroy(setting_t *setting);
 void check_quit(setting_t *setting);
 void menu_music(setting_t *setting);
 void display_levels(level_t *levels);
-
+void display_config(setting_t *setting);
+void display(setting_t *setting, graphic_t *graphic);
 void check_opt(setting_t *setting, graphic_t *graphic);
 void check_graph(setting_t *setting, graphic_t *graphic);
 void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
-void display(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void event(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
@@ -196,5 +200,11 @@ config_t **load_configs(void);
 
 sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
+
+config_t *get_config(const char *name, setting_t *setting);
+
+music_t **load_songs(config_t *songs_config);
+
+my_texture_t **load_textures(config_t *songs_config);
 
 #endif
