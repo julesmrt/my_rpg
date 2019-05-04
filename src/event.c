@@ -49,6 +49,14 @@ void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic)
                 sfText_setColor(graphic->word->text[i][j], sfRed);
         }
     }
+    if (sfFloatRect_contains(&graphic->texture->char_rect[0], setting->mouse_pos.x, setting->mouse_pos.y)) {
+        sfSprite_setColor(graphic->sprite->sprite_char_man, sfRed);
+    } else
+        sfSprite_setColor(graphic->sprite->sprite_char_man, sfWhite);
+    if (sfFloatRect_contains(&graphic->texture->char_rect[1], setting->mouse_pos.x, setting->mouse_pos.y)) {
+        sfSprite_setColor(graphic->sprite->sprite_char_skeleton, sfRed);
+    } else
+        sfSprite_setColor(graphic->sprite->sprite_char_skeleton, sfWhite);
 }
 
 void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)

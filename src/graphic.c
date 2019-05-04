@@ -62,8 +62,11 @@ word_t *create_word(setting_t *setting)
 
 void init_characters(setting_t *setting, graphic_t *graphic)
 {
+    graphic->texture->char_rect = malloc(sizeof(sfFloatRect) * 2);
     sfSprite_setPosition(graphic->sprite->sprite_char_man, (sfVector2f) {graphic->word->text_x -75, graphic->word->text_y});
     sfSprite_setPosition(graphic->sprite->sprite_char_skeleton, (sfVector2f) {graphic->word->text_x +125, graphic->word->text_y});
+    graphic->texture->char_rect[0] = sfSprite_getGlobalBounds(graphic->sprite->sprite_char_man);
+    graphic->texture->char_rect[1] = sfSprite_getGlobalBounds(graphic->sprite->sprite_char_skeleton);
 
     graphic->texture->who = sfText_create();
     sfText_setString(graphic->texture->who, "choose your hero");
