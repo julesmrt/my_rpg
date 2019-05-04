@@ -17,6 +17,8 @@ static const level_identifier_t identifiers[] =
         { "enemies" },
         { "map" },
         { "song" },
+        { "csv" },
+        { "tile" },
         { NULL }
     };
 
@@ -27,7 +29,9 @@ static const void (*fun[])(const char *line,
     tilesheet_to_lvl,
     enemies_to_lvl,
     map_to_lvl,
-    song_to_lvl
+    song_to_lvl,
+    csv_to_lvl,
+    tile_to_lvl
     };
 
 static void load_level_line(const char *line, level_t *level, FILE *file)
@@ -51,6 +55,9 @@ level_t *load_level(const char *path)
     FILE *file = fopen(path, "r");
 
     res->amnt_enemies = 0;
+    res->map = NULL;
+    res->csv = NULL;
+    res->name = NULL;
     while ((gtl = getline(&buf, &x, file)) > -1) {
         load_level_line(buf, res, file);
     }

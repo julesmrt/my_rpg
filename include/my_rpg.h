@@ -107,6 +107,7 @@ typedef struct tile {
     sfVertexArray **array;
     sfRenderStates state;
     unsigned int width;
+    int layers;
     int *tab;
     int **t_arr;
     int *entities;
@@ -192,10 +193,13 @@ void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic);
 void map_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void name_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void tile_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void song_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void enemies_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
+
+tiles_t *create_tile(char **csv);
 
 sprite_t *create_sprite(graphic_t *graphic);
 
