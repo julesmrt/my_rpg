@@ -93,7 +93,8 @@ void check_setting(setting_t *setting, graphic_t *graphic)
         case(HOW_TO_PLAY):
             break;
         case(PLAY):
-            printf("play");
+            setting->screen = PLAY_SCREEN;
+            setting->setting = -1;
             break;
     }
 }

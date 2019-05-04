@@ -22,6 +22,14 @@ void display_menu (setting_t *setting, graphic_t *graphic, int j)
     }
 }
 
+void display_charracters(setting_t *setting, graphic_t *graphic)
+{
+    sfRenderWindow_drawSprite(setting->renderWindow, graphic->sprite->sprite_background, NULL);
+    sfRenderWindow_drawText(setting->renderWindow, graphic->texture->who, NULL);
+    sfRenderWindow_drawSprite(setting->renderWindow, graphic->sprite->sprite_char_man, NULL);
+    sfRenderWindow_drawSprite(setting->renderWindow, graphic->sprite->sprite_char_skeleton, NULL);
+}
+
 void display(setting_t *setting, graphic_t *graphic)
 {
     sfRenderWindow_clear(setting->renderWindow, sfBlack);
@@ -46,9 +54,11 @@ void display(setting_t *setting, graphic_t *graphic)
             display_menu(setting, graphic, 3);
             check_sound(setting, graphic);
             break;
+        case(PLAY_SCREEN):
+            display_charracters(setting, graphic);
+            break;
         default:
             break;
-
     }
     sfRenderWindow_display(setting->renderWindow);
 }

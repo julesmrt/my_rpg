@@ -59,10 +59,15 @@ typedef enum menu_music {
 
 typedef struct sprite {
     sfSprite *sprite_background;
+    sfSprite *sprite_char_man;
+    sfSprite *sprite_char_skeleton;
 } sprite_t;
 
 typedef struct texture {
     sfTexture *background;
+    sfTexture *char_man;
+    sfTexture *char_skeleton;
+    sfText *who;
 } texture_t;
 
 typedef struct word {
@@ -184,6 +189,7 @@ void display_menu(setting_t *setting, graphic_t *graphic, int j);
 void display(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
+void display_charracters(setting_t *setting, graphic_t *graphic);
 void display_graph(setting_t *setting, graphic_t *graphic);
 
 config_t **load_configs(void);

@@ -53,11 +53,24 @@ void create_text(setting_t *setting, graphic_t *graphic)
 word_t *create_word(setting_t *setting)
 {
     word_t *word = malloc(sizeof(word_t));
-    word->font = sfFont_createFromFile("assets/font/horror.ttf");
+    word->font = sfFont_createFromFile("assets/font/medieval.ttf");
     word->text_x = setting->scrwidth / 2.3;
     word->text_y = setting->scrheight / 2;
 
     return word;
+}
+
+void init_characters(setting_t *setting, graphic_t *graphic)
+{
+    sfSprite_setPosition(graphic->sprite->sprite_char_man, (sfVector2f) {graphic->word->text_x -75, graphic->word->text_y});
+    sfSprite_setPosition(graphic->sprite->sprite_char_skeleton, (sfVector2f) {graphic->word->text_x +125, graphic->word->text_y});
+
+    graphic->texture->who = sfText_create();
+    sfText_setString(graphic->texture->who, "choose your hero");
+    sfText_setFont(graphic->texture->who, graphic->word->font);
+    sfText_setPosition(graphic->texture->who, (sfVector2f) {graphic->word->text_x - 250, graphic->word->text_y -250});
+    sfText_setCharacterSize(graphic->texture->who, 100.0);
+    sfText_setColor(graphic->texture->who, sfRed);
 }
 
 graphic_t *init_graphic(setting_t *setting)
@@ -69,6 +82,7 @@ graphic_t *init_graphic(setting_t *setting)
     graphic->texture = create_texture();
     graphic->sprite = create_sprite(graphic);
     create_text(setting, graphic);
+    init_characters(setting, graphic);
     
     return graphic;
 }
