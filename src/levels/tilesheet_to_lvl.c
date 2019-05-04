@@ -25,6 +25,7 @@ void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file)
         level->texture = NULL;
     else
         level->texture = texture;
+    my_printf("texture loaded: %s\n", texture == NULL ? "no" : "yes");
     free(filename);
     free(path);
 }

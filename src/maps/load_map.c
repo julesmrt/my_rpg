@@ -47,6 +47,10 @@ static int *parsing(int width, int height, char *path)
     FILE *fp = fopen(path, "r");
     int i = 0;
 
+    if (fp == NULL) {
+        my_printf("can't open: %s\n", path);
+        return NULL;
+    }
     while (getline(&buffer, &n, fp) > -1) {
         char *token = my_strtok(buffer, ",");
         while (token != NULL) {
@@ -55,7 +59,6 @@ static int *parsing(int width, int height, char *path)
             i++;
         }
     }
-    fclose(fp);
     return tab;
 }
 
@@ -91,11 +94,11 @@ static int amnt_layers(char **csv)
     return i;
 }
 
-tiles_t *create_tile(char **csv)
+tiles_t *create_tile(char **csv, sfTexture *texture)
 {
     tiles_t *tile = malloc(sizeof(tiles_t));
 
-    TEXTURET = sfTexture_createFromFile("lvl2.png", NULL);
+    tile->texture = texture;
     tile->layers = amnt_layers(csv);
     SI.x = 32;
     SI.y = 32;
@@ -106,7 +109,6 @@ tiles_t *create_tile(char **csv)
     tile->state.blendMode = sfBlendAlpha;
     tile->state.shader = NULL;
     tile->state.transform = sfTransform_Identity;
-    tile->state.texture = TEXTURET;
-
+    tile->state.texture = tile->texture;
     return tile;
 }

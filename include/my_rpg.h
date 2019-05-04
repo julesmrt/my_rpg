@@ -22,6 +22,7 @@ typedef enum my_screen {
     OPT_SCREEN = 2,
     OPT_GRAPH_SCREEN = 1,
     OPT_SOUND_SCREEN = 0,
+    TEST_LVL = 50,
 } my_screen_t;
 
 typedef enum menu {
@@ -160,6 +161,7 @@ typedef struct setting {
     sfBool vertical;
     float fps;
     sfBool music;
+    level_t *curr_lvl;
     level_t *levels;
     my_texture_t **textures;
     config_t **config;
@@ -183,6 +185,7 @@ void display_levels(level_t *levels);
 void display_config(setting_t *setting);
 void display(setting_t *setting, graphic_t *graphic);
 void check_opt(setting_t *setting, graphic_t *graphic);
+void display_level(level_t *level, setting_t *setting);
 void check_graph(setting_t *setting, graphic_t *graphic);
 void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
@@ -199,7 +202,7 @@ void enemies_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
 
-tiles_t *create_tile(char **csv);
+tiles_t *create_tile(char **csv, sfTexture *texture);
 
 sprite_t *create_sprite(graphic_t *graphic);
 
