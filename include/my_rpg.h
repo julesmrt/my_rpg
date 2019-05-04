@@ -205,6 +205,8 @@ config_t *get_config(const char *name, setting_t *setting);
 
 music_t **load_songs(config_t *songs_config);
 
+sfMusic *get_song(const char *name, setting_t *setting);
+
 my_texture_t **load_textures(config_t *songs_config);
 
 #endif

@@ -10,5 +10,5 @@
 
 void name_to_lvl(const char *line, char *id, level_t *level, FILE *file)
 {
-    level->name = my_trim(my_strdup(my_strtok(NULL, ":") + 1), "\n");
+    level->name = my_trim(my_strtok(NULL, ":") + 1, "\n");
 }
