@@ -68,6 +68,7 @@ typedef struct texture {
     sfTexture *char_man;
     sfTexture *char_skeleton;
     sfText *who;
+    sfFloatRect *char_rect;
 } texture_t;
 
 typedef struct my_texture {
