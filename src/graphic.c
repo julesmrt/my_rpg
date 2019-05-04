@@ -28,7 +28,7 @@ void give_opt(setting_t *setting, graphic_t *graphic, int i, int j)
     graphic->word->text[i][j] = sfText_create();
     sfText_setString(graphic->word->text[i][j], text[i][j]);
     sfText_setFont(graphic->word->text[i][j], graphic->word->font);
-    sfText_setPosition(graphic->word->text[i][j], (sfVector2f) {graphic->word->text_x, graphic->word->text_y});
+    sfText_setPosition(graphic->word->text[i][j], (sfVector2f) {graphic->word->text_x - 100, graphic->word->text_y});
     sfText_setCharacterSize(graphic->word->text[i][j], 100.0);
     sfText_setColor(graphic->word->text[i][j], sfRed);
     graphic->word->glob_rect[i][j] = sfText_getGlobalBounds(graphic->word->text[i][j]);

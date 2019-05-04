@@ -98,6 +98,19 @@ typedef struct enemy {
     struct enemy *next;
 } enemy_t;
 
+typedef struct hero {
+    int type;
+    int health;
+    int attack;
+    sfVector2i *spawn;
+    sfTexture *texture;
+} hero_t;
+
+typedef struct fight {
+    enemy_t *ennemy;
+    hero_t *hero;
+} fight_t;
+
 typedef struct level_identifier {
     char *name;
 } level_identifier_t;
@@ -201,6 +214,8 @@ config_t **load_configs(void);
 
 sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
+
+fight_t *init_fight(setting_t *setting, graphic_t *graphic);
 
 config_t *get_config(const char *name, setting_t *setting);
 
