@@ -24,6 +24,14 @@ void display_levels(level_t *levels)
                 my_printf("%s\n", ref->map[i]);
             }
         }
+        if (ref->csv == NULL)
+            my_printf("csv: no\n");
+        else {
+            my_printf("csv:\n");
+            for (int i = 0; ref->csv[i] != NULL; i++) {
+                my_printf("%s\n", ref->csv[i]);
+            }
+        }
         ref = ref->next;
     }
 }

@@ -17,6 +17,10 @@
 void destroy(setting_t *setting)
 {
     sfRenderWindow_close(setting->renderWindow);
+    for (int i = 0; setting->musics[i]->name != NULL; i++) {
+        sfMusic_destroy(setting->musics[i]->ptr);
+        free(setting->musics[i]->name);
+    }
     exit(0);
 }
 
