@@ -11,28 +11,45 @@
 
 static const char *path = "assets/musics/";
 
+static music_t *load_single_song(const char *line)
+{
+    char *cpy = my_strdup(line);
+    char *id = my_strtok(cpy, ": ");
+    char *file = my_strtok(NULL, ": ");
+    char *complete_path = my_empty_char(my_strlen(file) + my_strlen(path) + 1);
+    music_t *res = malloc(sizeof(music_t));
+
+    if (res == NULL) {
+        free(cpy);
+        free(id);
+        return NULL;
+    }
+    complete_path = my_strcat(complete_path, path);
+    complete_path = my_strcat(complete_path, file);
+    res->name = my_strdup(id);
+    res->ptr = sfMusic_createFromFile(complete_path);
+    return res;
+}
+
 music_t **load_songs(config_t *songs_config)
 {
     int size = 0;
     size_t ptr_size;
-    char *temp = NULL;
+    music_t *temp = NULL;
     music_t **res = NULL;
-    char *temp_path = NULL;
 
     for (int i = 0; songs_config->values[i] != NULL; i++) {
+        temp = load_single_song(songs_config->values[i]);
+        if (temp == NULL)
+            continue;
         ptr_size = sizeof(*res) * size;
         res = my_realloc(res, ptr_size, ptr_size * (size + 2));
-        temp = my_strdup(songs_config->values[i]);
-        res[size] = malloc(sizeof(music_t));
-        res[size]->name = my_strdup(my_strtok(temp, ":") + 1);
-        temp_path = my_empty_char(my_strlen(path) + my_strlen(temp));
-        temp_path = my_strcat(temp_path, path);
-        temp_path = my_strcat(temp_path, temp);
-        res[size++]->ptr = sfMusic_createFromFile(temp_path);
+        res[size++] = temp;
     }
-    if (res != NULL)
-        res[size] = NULL;
-    free(temp);
-    free(temp_path);
+    if (res != NULL) {
+        res[size] = malloc(sizeof(music_t));
+        res[size]->name = NULL;
+        res[size]->ptr = NULL;
+    }
     return res;
 }
