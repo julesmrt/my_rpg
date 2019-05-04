@@ -34,9 +34,11 @@ setting_t *init_setting(void)
     setting->fps = 60.0;
     setting->music = sfTrue;
     setting->levels = load_levels();
+    setting->musics = load_songs(get_config("songs", setting));
     if (setting->levels == NULL)
         my_printf("Error loading levels\n");
     else
         display_levels(setting->levels);
+    display_config(setting);
     return setting;
 }

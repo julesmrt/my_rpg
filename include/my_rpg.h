@@ -107,7 +107,7 @@ typedef struct config {
     char **values;
 } config_t;
 
-typedef struct my_music {
+typedef struct music {
     char *name;
     sfMusic *ptr;
 } music_t;
@@ -144,8 +144,6 @@ level_t *get_level(setting_t *settings, const char *name);
 
 char *trim_whitespace(char *src);
 
-char **get_config(const char *name, setting_t *setting);
-
 int my_rpg(void);
 
 setting_t *init_setting(void);
@@ -155,12 +153,12 @@ void destroy(setting_t *setting);
 void check_quit(setting_t *setting);
 void menu_music(setting_t *setting);
 void display_levels(level_t *levels);
-
+void display_config(setting_t *setting);
+void display(setting_t *setting, graphic_t *graphic);
 void check_opt(setting_t *setting, graphic_t *graphic);
 void check_graph(setting_t *setting, graphic_t *graphic);
 void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
-void display(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void event(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
@@ -190,5 +188,9 @@ config_t **load_configs(void);
 
 sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
+
+config_t *get_config(const char *name, setting_t *setting);
+
+music_t **load_songs(config_t *songs_config);
 
 #endif
