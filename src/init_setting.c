@@ -35,6 +35,7 @@ setting_t *init_setting(void)
     setting->music = sfTrue;
     setting->levels = load_levels();
     setting->musics = load_songs(get_config("songs", setting));
+    setting->textures = load_textures(get_config("textures", setting));
     if (setting->levels == NULL)
         my_printf("Error loading levels\n");
     else

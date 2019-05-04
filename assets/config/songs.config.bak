@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 menu: menu_music.ogg
 level_one_music: music_for_level.ogg
 level_two_music: music_two_for_level.ogg
@@ -10,3 +11,7 @@ saber: saber.ogg
 saber_two: saber_two.ogg
 sword: sword.ogg
 sword_slips: sword_slips.ogg
+=======
+name: menu.mp3
+sexe: test.ogg
+>>>>>>> a5f0bf4b1c21b85258c853d53b38d0d5472b48da

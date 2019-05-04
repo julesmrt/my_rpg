@@ -65,6 +65,11 @@ typedef struct texture {
     sfTexture *background;
 } texture_t;
 
+typedef struct my_texture {
+    sfTexture *ptr;
+    char *name;
+} my_texture_t;
+
 typedef struct word {
     sfFont *font;
     sfText ***text;
@@ -135,6 +140,7 @@ typedef struct setting {
     float fps;
     sfBool music;
     level_t *levels;
+    my_texture_t **textures;
     config_t **config;
 } setting_t;
 
@@ -192,5 +198,7 @@ sfMusic *get_music(setting_t *setting, const char *name);
 config_t *get_config(const char *name, setting_t *setting);
 
 music_t **load_songs(config_t *songs_config);
+
+my_texture_t **load_textures(config_t *songs_config);
 
 #endif
