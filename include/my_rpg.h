@@ -101,9 +101,23 @@ typedef struct level_identifier {
     char *name;
 } level_identifier_t;
 
+typedef struct tile {
+    sfTexture *texture;
+    sfVertexArray **array;
+    sfRenderStates state;
+    unsigned int width;
+    int *tab;
+    int **t_arr;
+    int *entities;
+    unsigned int height;
+    sfVector2u size;
+} tiles_t;
+
 typedef struct level {
+    char **csv;
     char *name;
     char **map;
+    tiles_t *tile;
     sfVector2i *exit;
     enemy_t *enemies;
     int amnt_enemies;
@@ -172,6 +186,7 @@ void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void event(sfEvent event, setting_t *setting, graphic_t *graphic);
+void csv_to_lvl(const char *line, char *id, level_t *level, FILE *file);
 void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic);
 void map_to_lvl(const char *line, char *id, level_t *level, FILE *file);
