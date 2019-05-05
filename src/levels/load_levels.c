@@ -53,7 +53,7 @@ static char *get_path(const char *filename)
     return res;
 }
 
-level_t *load_levels(void)
+level_t *load_levels(setting_t *setting)
 {
     char *path = NULL;
     DIR *folder = NULL;
@@ -71,7 +71,7 @@ level_t *load_levels(void)
         if (path == NULL) {
             continue;
         }
-        temp = load_level(path);
+        temp = load_level(path, setting);
         if (temp == NULL)
             continue;
         add_to_level_list(&list, temp);

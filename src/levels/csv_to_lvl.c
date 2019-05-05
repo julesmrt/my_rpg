@@ -11,7 +11,7 @@
 
 static const char *path = "assets/levels/";
 
-void csv_to_lvl(const char *line, char *id, level_t *level, FILE *file)
+void csv_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file)
 {
     int size = 0;
     size_t  x = 0;

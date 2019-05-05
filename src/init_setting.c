@@ -33,10 +33,9 @@ setting_t *init_setting(void)
     sfRenderWindow_setVerticalSyncEnabled(setting->renderWindow, setting->vertical);
     setting->fps = 60.0;
     setting->music = sfTrue;
-    setting->levels = load_levels();
     setting->musics = load_songs(get_config("songs", setting));
     setting->textures = load_textures(get_config("textures", setting));
-//    display_config(setting);
-//    display_levels(setting->levels);
+    setting->levels = load_levels(setting);
+    display_levels(setting->levels);
     return setting;
 }

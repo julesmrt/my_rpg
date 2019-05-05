@@ -66,9 +66,7 @@ static void vertex(tiles_t *tile)
 {
     tile->array = malloc(sizeof(sfVertexArray *) * LAYERS);
 
-    for (int i = 0; tile->array != NULL && i < LAYERS; i++) {
-        if (tile->array[i] == NULL)
-            continue;
+    for (int i = 0; i < LAYERS; i++) {
         tile->array[i] = sfVertexArray_create();
         sfVertexArray_setPrimitiveType(tile->array[i], sfQuads);
         sfVertexArray_resize(tile->array[i], WIDTH * HEIGHT * 4);

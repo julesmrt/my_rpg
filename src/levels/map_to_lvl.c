@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void map_to_lvl(const char *line, char *id, level_t *level, FILE *file)
+void map_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file)
 {
     int size = 0;
     char **map = NULL;

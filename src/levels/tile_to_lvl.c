@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void tile_to_lvl(const char *line, char *id, level_t *level, FILE *file)
+void tile_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file)
 {
     if (level->csv == NULL || level->texture == NULL) {
         level->tile = NULL;
