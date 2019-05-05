@@ -84,7 +84,7 @@ void check_setting(setting_t *setting, graphic_t *graphic)
 {
     switch(setting->setting) {
         case(LEAVE):
-            destroy(setting);
+            destroy(setting, sfKeyEscape);
             break;
         case(OPTIONS):
             setting->screen = OPT_SCREEN;
@@ -94,7 +94,9 @@ void check_setting(setting_t *setting, graphic_t *graphic)
             break;
         case(PLAY):
             setting->setting = -1;
-            setting->curr_lvl = get_level(setting, "test");
+            setting->curr_lvl = get_level(setting, "first_level");
+            setting->hero = load_hero(setting);
+            sfRenderWindow_setView(setting->renderWindow, setting->camera);
             setting->screen = TEST_LVL;
             break;
     }

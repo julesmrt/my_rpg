@@ -9,5 +9,6 @@
 
 void display_player(setting_t *setting)
 {
-
+    sfRenderWindow_drawSprite(setting->renderWindow, setting->hero->sprite,
+                              NULL);
 }

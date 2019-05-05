@@ -64,6 +64,8 @@ void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)
     int i;
     setting->mouse_pos = sfMouse_getPosition((sfWindow *) setting->renderWindow);
 
+    if (setting->screen != MENU_SCREEN)
+        return;
     for (i = 0; graphic->word->text[o][i] != NULL; i++) {
         if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue)
             if (sfFloatRect_contains(&graphic->word->glob_rect[o][i], setting->mouse_pos.x, setting->mouse_pos.y) == sfTrue) {

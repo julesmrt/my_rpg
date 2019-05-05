@@ -10,30 +10,22 @@
 
 void move_player(setting_t *setting, sfKeyCode code)
 {
-    sfVector2f offset = { 0.f, 0.f };
-
-    if (setting->camera == NULL) {
-        my_printf("Error fuck off\n");
-        return;
-    }
+    sfVector2f old_pos = sfSprite_getPosition(setting->hero->sprite);
 
     switch (code) {
         case sfKeyLeft:
-            offset.x = -1000;
+            old_pos.x -= 32;
             break;
         case sfKeyRight:
-            offset.x = 1000;
+            old_pos.x += 32;
             break;
         case sfKeyUp:
-            offset.y = -1000;
+            old_pos.y -= 32;
             break;
         case sfKeyDown:
-            offset.y = 1000;
+            old_pos.y += 32;
             break;
-        case sfKeySpace:
-            sfView_zoom(setting->camera, 1.5f);
-            return;
         default: return;
     }
-    sfView_move(setting->camera, offset);
+    sfSprite_setPosition(setting->hero->sprite, old_pos);
 }

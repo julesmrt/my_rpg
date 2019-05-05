@@ -12,7 +12,6 @@
 #define HEIGHT (tile->height)
 #define SI (tile->size)
 #define TEXTURET (tile->texture)
-#define POST (position)
 #define LAYERS (tile->layers)
 
 static void tiles_info(tiles_t *tile, sfVertexArray *ar, const int *tab)
@@ -30,7 +29,6 @@ static void tiles_info(tiles_t *tile, sfVertexArray *ar, const int *tab)
             quad[1].position = (sfVector2f) {(i + 1) * SI.x, j * SI.y};
             quad[2].position = (sfVector2f) {(i + 1) * SI.x, (j + 1) * SI.y};
             quad[3].position = (sfVector2f) {i * SI.x, (j + 1) * SI.y};
-
             quad[0].texCoords = (sfVector2f) {tu * SI.x, tv * SI.y};
             quad[1].texCoords = (sfVector2f) {(tu + 1) * SI.x, tv * SI.y};
             quad[2].texCoords = (sfVector2f) {(tu + 1) * SI.x, (tv + 1) * SI.y};
@@ -47,10 +45,8 @@ static int *parsing(int width, int height, char *path)
     FILE *fp = fopen(path, "r");
     int i = 0;
 
-    if (fp == NULL) {
-        my_printf("can't open: %s\n", path);
+    if (fp == NULL)
         return NULL;
-    }
     while (getline(&buffer, &n, fp) > -1) {
         char *token = my_strtok(buffer, ",");
         while (token != NULL) {
@@ -67,6 +63,8 @@ static void vertex(tiles_t *tile)
     tile->array = malloc(sizeof(sfVertexArray *) * LAYERS);
 
     for (int i = 0; i < LAYERS; i++) {
+        if (tile->t_arr[i] == NULL)
+            continue;
         tile->array[i] = sfVertexArray_create();
         sfVertexArray_setPrimitiveType(tile->array[i], sfQuads);
         sfVertexArray_resize(tile->array[i], WIDTH * HEIGHT * 4);
@@ -91,7 +89,6 @@ static int amnt_layers(char **csv)
     while (csv[i] != NULL) {
         i++;
     }
-    my_printf("Layers: %d\n", i);
     return i;
 }
 
@@ -100,10 +97,6 @@ tiles_t *create_tile(char **csv, level_t *level)
     tiles_t *tile = malloc(sizeof(tiles_t));
 
     tile->texture = level->texture;
-    if (level->texture == NULL) {
-        my_printf("Error\n");
-        return NULL;
-    }
     tile->layers = amnt_layers(csv);
     SI.x = 32;
     SI.y = 32;
