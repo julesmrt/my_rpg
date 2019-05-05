@@ -28,7 +28,7 @@ int main(int ac, char *av[])
                 menu_music(setting);
             }
         }
-        display(setting, graphic);
+        display(setting, graphic, fight);
     }
     destroy(setting);
     return 0;

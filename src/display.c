@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/my_rpg.h"
+#include "my.h"
 
 void display_menu (setting_t *setting, graphic_t *graphic, int j)
 {
@@ -30,7 +31,7 @@ void display_charracters(setting_t *setting, graphic_t *graphic)
     sfRenderWindow_drawSprite(setting->renderWindow, graphic->sprite->sprite_char_skeleton, NULL);
 }
 
-void display(setting_t *setting, graphic_t *graphic)
+void display(setting_t *setting, graphic_t *graphic, fight_t *fight)
 {
     sfRenderWindow_clear(setting->renderWindow, sfBlack);
     switch(setting->screen)
@@ -56,6 +57,9 @@ void display(setting_t *setting, graphic_t *graphic)
             break;
         case(CHOOSE_SCREEN):
             display_charracters(setting, graphic);
+            break;
+        case(FIGHT_SCREEN):
+            display_fight(setting, graphic, fight);
             break;
         default:
             break;

@@ -94,8 +94,8 @@ typedef struct graphic {
 } graphic_t;
 
 typedef struct enemy {
-    int health;
-    int attack;
+    unsigned int health;
+    unsigned int attack;
     sfVector2i *spawn;
     sfTexture *texture;
     struct enemy *next;
@@ -103,9 +103,9 @@ typedef struct enemy {
 
 typedef struct hero {
     int type;
-    int health;
-    int attack;
-    int mana;
+    unsigned int health;
+    unsigned int attack;
+    unsigned int mana;
     sfVector2i *spawn;
     sfTexture *texture;
 } hero_t;
@@ -113,6 +113,7 @@ typedef struct hero {
 typedef struct fight {
     enemy_t *ennemy;
     hero_t *hero;
+    sfText **hud;
 } fight_t;
 
 typedef struct level_identifier {
@@ -181,6 +182,7 @@ typedef struct setting {
     level_t *levels;
     my_texture_t **textures;
     config_t **config;
+    int type_hero;
 } setting_t;
 
 level_t *load_levels(void);
@@ -199,7 +201,7 @@ void check_quit(setting_t *setting);
 void menu_music(setting_t *setting);
 void display_levels(level_t *levels);
 void display_config(setting_t *setting);
-void display(setting_t *setting, graphic_t *graphic);
+void display(setting_t *setting, graphic_t *graphic, fight_t *fight);
 void check_opt(setting_t *setting, graphic_t *graphic);
 void display_level(level_t *level, setting_t *setting);
 void check_graph(setting_t *setting, graphic_t *graphic);
@@ -229,7 +231,6 @@ graphic_t *init_graphic(setting_t *setting);
 word_t *create_word(setting_t *setting);
 
 void display_menu(setting_t *setting, graphic_t *graphic, int j);
-void display(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
 void display_charracters(setting_t *setting, graphic_t *graphic);
@@ -241,6 +242,7 @@ sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
 
 fight_t *init_fight(setting_t *setting, graphic_t *graphic);
+void display_fight(setting_t *setting, graphic_t *graphic, fight_t *fight);
 
 config_t *get_config(const char *name, setting_t *setting);
 
@@ -249,5 +251,7 @@ music_t **load_songs(config_t *songs_config);
 sfMusic *get_song(const char *name, setting_t *setting);
 
 my_texture_t **load_textures(config_t *songs_config);
+
+char *integer_to_str(int nb);
 
 #endif
