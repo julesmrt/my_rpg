@@ -13,7 +13,7 @@
 static const level_identifier_t identifiers[] =
     {
         { "name" },
-        { "tilesheet" },
+        { "texture" },
         { "enemies" },
         { "map" },
         { "song" },
@@ -58,8 +58,14 @@ level_t *load_level(const char *path)
     res->map = NULL;
     res->csv = NULL;
     res->name = NULL;
+    res->texture = NULL;
+    res->tile = NULL;
     while ((gtl = getline(&buf, &x, file)) > -1) {
         load_level_line(buf, res, file);
+    }
+    if (res->csv != NULL && res->texture != NULL) {
+        res->tile = create_tile(res->csv, res->texture);
+        my_printf("tile non null\n");
     }
     res->next = NULL;
     fclose(file);

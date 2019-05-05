@@ -12,9 +12,9 @@
 
 void tile_to_lvl(const char *line, char *id, level_t *level, FILE *file)
 {
-    if (level->csv == NULL) {
+    if (level->csv == NULL || level->texture == NULL) {
         level->tile = NULL;
         return;
     }
-    level->tile = create_tile(level->csv);
+    level->tile = create_tile(level->csv, level->texture);
 }
