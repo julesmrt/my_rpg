@@ -16,12 +16,14 @@
 
 void menu_music(setting_t *setting)
 {
+    sfMusic *menu_music = get_song("menu", setting);
+    
     if (setting->on_off == ON) {
         setting->on_off = OFF;
     }
-    else if (setting->on_off == OFF) {
+    else if (setting->on_off == OFF && menu_music != NULL) {
         setting->on_off = ON;
-//        sfMusic_play(setting->menu_music);
-//        sfMusic_setLoop(setting->menu_music, sfTrue);
+        sfMusic_play(menu_music);
+        sfMusic_setLoop(menu_music, sfTrue);
     }
 }
