@@ -93,7 +93,7 @@ void check_setting(setting_t *setting, graphic_t *graphic)
         case(HOW_TO_PLAY):
             break;
         case(PLAY):
-            setting->screen = PLAY_SCREEN;
+            setting->screen = CHOOSE_SCREEN;
             setting->setting = -1;
             break;
     }

@@ -16,7 +16,9 @@
 #define my_rpg_HEADER_H_
 
 typedef enum my_screen {
-    PLAY_SCREEN = 5,
+    FIGHT_SCREEN = 7,
+    PLAY_SCREEN = 6,
+    CHOOSE_SCREEN = 5,
     MENU_SCREEN = 4,
     HOW_TO_PLAY_SCREEN = 3,
     OPT_SCREEN = 2,
@@ -102,6 +104,7 @@ typedef struct hero {
     int type;
     int health;
     int attack;
+    int mana;
     sfVector2i *spawn;
     sfTexture *texture;
 } hero_t;
