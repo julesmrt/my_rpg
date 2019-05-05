@@ -185,6 +185,7 @@ typedef struct setting {
     level_t *levels;
     my_texture_t **textures;
     config_t **config;
+    hero_t *hero;
     int type_hero;
 } setting_t;
 
@@ -195,6 +196,8 @@ level_t *get_level(setting_t *settings, const char *name);
 char *trim_whitespace(char *src);
 
 int my_rpg(void);
+
+hero_t *load_hero(setting_t *setting);
 
 setting_t *init_setting(void);
 
@@ -233,6 +236,8 @@ sprite_t *create_sprite(graphic_t *graphic);
 texture_t *create_texture(void);
 
 sfView *camera(setting_t *setting);
+
+sfVector2i *get_spawn(level_t *level);
 
 graphic_t *init_graphic(setting_t *setting);
 

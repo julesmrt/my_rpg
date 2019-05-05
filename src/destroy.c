@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "../include/my_rpg.h"
 
-void destroy(setting_t *setting)
+void destroy(setting_t *setting, sfKeyCode code)
 {
     sfRenderWindow_close(setting->renderWindow);
     for (int i = 0; setting->musics[i]->name != NULL; i++) {
@@ -22,11 +22,4 @@ void destroy(setting_t *setting)
         free(setting->musics[i]->name);
     }
     exit(0);
-}
-
-void check_quit(setting_t *setting)
-{
-    if (sfKeyboard_isKeyPressed(sfKeyEscape) == sfTrue) {
-        sfRenderWindow_close(setting->renderWindow);
-    }
 }

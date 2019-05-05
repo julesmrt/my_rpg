@@ -14,7 +14,7 @@ void display_level(level_t *level, setting_t *setting)
         my_printf("no level\n");
         return;
     }
-    for (int i = 0; i < level->tile->layers; i++) {
+    for (int i = 0; i < level->tile->layers - 1; i++) {
         sfRenderWindow_drawVertexArray(setting->renderWindow,
             level->tile->array[i], &(level->tile->state));
     }

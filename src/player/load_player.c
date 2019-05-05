@@ -16,4 +16,9 @@ hero_t *load_hero(setting_t *setting)
         hero->texture = get_texture("char1", setting);
     else
         hero->texture = get_texture("char2", setting);
+    hero->attack = 100;
+    hero->health = 100;
+    hero->mana = 100;
+    hero->spawn = get_spawn(setting->curr_lvl);
+    return hero;
 }
