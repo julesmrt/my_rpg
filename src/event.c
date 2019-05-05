@@ -71,6 +71,15 @@ void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)
                 break;
             }
     }
+    if (sfMouse_isButtonPressed(sfMouseLeft) == sfTrue)
+        if (sfFloatRect_contains(&graphic->texture->char_rect[0], setting->mouse_pos.x, setting->mouse_pos.y)) {
+            setting->type_hero = 1;
+            setting->screen = FIGHT_SCREEN;
+        }
+        if(sfFloatRect_contains(&graphic->texture->char_rect[1], setting->mouse_pos.x, setting->mouse_pos.y)) {
+            setting->type_hero = 2;
+            setting->screen = FIGHT_SCREEN;
+        }
 }
 
 void event(sfEvent event, setting_t *setting, graphic_t *graphic)
