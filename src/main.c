@@ -30,6 +30,6 @@ int main(int ac, char *av[])
         }
         display(setting, graphic);
     }
-    destroy(setting);
+    destroy(setting, sfKeyEscape);
     return 0;
 }

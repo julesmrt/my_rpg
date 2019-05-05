@@ -180,6 +180,7 @@ typedef struct setting {
     float fps;
     sfBool music;
     level_t *curr_lvl;
+    sfView *camera;
     level_t *levels;
     my_texture_t **textures;
     config_t **config;
@@ -195,15 +196,17 @@ int my_rpg(void);
 
 setting_t *init_setting(void);
 
-
-void destroy(setting_t *setting);
+void move_left(setting_t *setting);
 void check_quit(setting_t *setting);
 void menu_music(setting_t *setting);
 void display_levels(level_t *levels);
 void display_config(setting_t *setting);
+void destroy(setting_t *setting, sfKeyCode code);
+void move_player(setting_t *setting, sfKeyCode code);
 void display(setting_t *setting, graphic_t *graphic);
 void check_opt(setting_t *setting, graphic_t *graphic);
 void display_level(level_t *level, setting_t *setting);
+void keyboard_events(setting_t *setting, sfKeyEvent key);
 void check_graph(setting_t *setting, graphic_t *graphic);
 void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
@@ -227,6 +230,8 @@ sprite_t *create_sprite(graphic_t *graphic);
 
 texture_t *create_texture(void);
 
+sfView *camera(setting_t *setting);
+
 graphic_t *init_graphic(setting_t *setting);
 
 word_t *create_word(setting_t *setting);
@@ -244,6 +249,8 @@ sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
 
 fight_t *init_fight(setting_t *setting, graphic_t *graphic);
+
+sfTexture *get_texture(const char *name, setting_t *setting);
 
 config_t *get_config(const char *name, setting_t *setting);
 

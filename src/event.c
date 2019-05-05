@@ -75,20 +75,15 @@ void mouse_clicked(sfEvent event, setting_t *setting, graphic_t *graphic, int o)
 
 void event(sfEvent event, setting_t *setting, graphic_t *graphic)
 {
-    switch(event.type)
-    {
+    switch(event.type) {
         case (sfEvtClosed):
-            return destroy(setting);
-        case (sfEvtKeyPressed):
-            check_quit(setting);
-        break;
+            return destroy(setting, sfKeyEscape);
+        case (sfEvtKeyReleased):
+            return keyboard_events(setting, event.key);
         case (sfEvtMouseMoved):
-            mouse_moved(event, setting, graphic);
-        break;
+            return mouse_moved(event, setting, graphic);
         case (sfEvtMouseButtonPressed):
-            mouse_clicked(event, setting, graphic, get_screen(setting, graphic));
-        break;
-        default:
-            break;
+            return mouse_clicked(event, setting, graphic, get_screen(setting, graphic));
+        default: break;
     }
 }
