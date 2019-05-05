@@ -36,6 +36,6 @@ setting_t *init_setting(void)
     setting->musics = load_songs(get_config("songs", setting));
     setting->textures = load_textures(get_config("textures", setting));
     setting->levels = load_levels(setting);
-    display_levels(setting->levels);
+    setting->camera = camera(setting);
     return setting;
 }

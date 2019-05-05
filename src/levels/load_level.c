@@ -64,6 +64,8 @@ level_t *load_level(const char *path, setting_t *setting)
     res->csv = NULL;
     res->name = NULL;
     res->texture = NULL;
+    res->height = 0;
+    res->width = 0;
     res->tile = NULL;
     while ((gtl = getline(&buf, &x, file)) > -1) {
         load_level_line(buf, setting, res, file);
