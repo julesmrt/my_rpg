@@ -134,6 +134,8 @@ typedef struct tile {
 } tiles_t;
 
 typedef struct level {
+    int width;
+    int height;
     char **csv;
     char *name;
     char **map;
@@ -185,8 +187,8 @@ typedef struct setting {
     int type_hero;
 } setting_t;
 
-level_t *load_levels(void);
-level_t *load_level(const char *path);
+level_t *load_levels(setting_t *setting);
+level_t *load_level(const char *path, setting_t *setting);
 level_t *get_level(setting_t *settings, const char *name);
 
 char *trim_whitespace(char *src);
@@ -209,18 +211,19 @@ void check_sound(setting_t *setting, graphic_t *graphic);
 void check_setting(setting_t *setting, graphic_t *graphic);
 void display_setting(setting_t *setting, graphic_t *graphic);
 void event(sfEvent event, setting_t *setting, graphic_t *graphic);
-void csv_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void w_h_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void csv_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
 void mouse_moved(sfEvent event, setting_t *setting, graphic_t *graphic);
 void mouse_click(sfEvent event, setting_t *setting, graphic_t *graphic);
-void map_to_lvl(const char *line, char *id, level_t *level, FILE *file);
-void name_to_lvl(const char *line, char *id, level_t *level, FILE *file);
-void tile_to_lvl(const char *line, char *id, level_t *level, FILE *file);
-void song_to_lvl(const char *line, char *id, level_t *level, FILE *file);
-void enemies_to_lvl(const char *line, char *id, level_t *level, FILE *file);
-void tilesheet_to_lvl(const char *line, char *id, level_t *level, FILE *file);
+void map_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void name_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void tile_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void song_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void enemies_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
+void tilesheet_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file);
 void mouse_click_setting(sfEvent event, setting_t *setting, graphic_t *graphic);
 
-tiles_t *create_tile(char **csv, sfTexture *texture);
+tiles_t *create_tile(char **csv, level_t *level);
 
 sprite_t *create_sprite(graphic_t *graphic);
 

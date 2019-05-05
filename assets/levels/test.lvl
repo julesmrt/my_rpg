@@ -1,0 +1,7 @@
+name: test
+texture: tilesheet.png
+csv:
+try_bottom.csv
+endcsv
+width: 15
+height: 15

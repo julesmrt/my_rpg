@@ -19,7 +19,6 @@ texture_t *create_texture(void)
     texture_t *texture = malloc(sizeof(texture_t));
 
     texture->background = sfTexture_createFromFile("assets/menu/menu_background.png", NULL);
-    texture->how_to_play = sfTexture_createFromFile("assets/menu/how_to_play.png", NULL);
     texture->char_man = sfTexture_createFromFile("assets/tilesheet/char1.png", NULL);
     texture->char_skeleton = sfTexture_createFromFile("assets/tilesheet/char2.png", NULL);
 

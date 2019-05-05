@@ -60,6 +60,8 @@ void display(setting_t *setting, graphic_t *graphic, fight_t *fight)
             break;
         case(FIGHT_SCREEN):
             display_fight(setting, graphic, fight);
+        case (TEST_LVL):
+            display_level(setting->curr_lvl, setting);
             break;
         default:
             break;
