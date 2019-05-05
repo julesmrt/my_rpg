@@ -18,6 +18,7 @@ int main(int ac, char *av[])
 {
     setting_t *setting = init_setting();
     graphic_t *graphic = init_graphic(setting);
+    fight_t *fight = init_fight(setting, graphic);
     setting->music_is_running = OFF;
 
     while (sfRenderWindow_isOpen(setting->renderWindow)) {

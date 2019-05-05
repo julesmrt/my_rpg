@@ -16,7 +16,9 @@
 #define my_rpg_HEADER_H_
 
 typedef enum my_screen {
-    PLAY_SCREEN = 5,
+    FIGHT_SCREEN = 7,
+    PLAY_SCREEN = 6,
+    CHOOSE_SCREEN = 5,
     MENU_SCREEN = 4,
     HOW_TO_PLAY_SCREEN = 3,
     OPT_SCREEN = 2,
@@ -98,6 +100,20 @@ typedef struct enemy {
     sfTexture *texture;
     struct enemy *next;
 } enemy_t;
+
+typedef struct hero {
+    int type;
+    int health;
+    int attack;
+    int mana;
+    sfVector2i *spawn;
+    sfTexture *texture;
+} hero_t;
+
+typedef struct fight {
+    enemy_t *ennemy;
+    hero_t *hero;
+} fight_t;
 
 typedef struct level_identifier {
     char *name;
@@ -223,6 +239,8 @@ config_t **load_configs(void);
 
 sfMusic **load_sounds(setting_t *setting);
 sfMusic *get_music(setting_t *setting, const char *name);
+
+fight_t *init_fight(setting_t *setting, graphic_t *graphic);
 
 config_t *get_config(const char *name, setting_t *setting);
 
