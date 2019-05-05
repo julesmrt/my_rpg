@@ -8,7 +8,7 @@
 #include "my_rpg.h"
 #include "my.h"
 
-void name_to_lvl(const char *line, char *id, level_t *level, FILE *file)
+void name_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file)
 {
     level->name = my_trim(my_strtok(NULL, ":") + 1, "\n");
 }

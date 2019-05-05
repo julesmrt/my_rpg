@@ -19,10 +19,12 @@ static const level_identifier_t identifiers[] =
         { "song" },
         { "csv" },
         { "tile" },
+        { "width" },
+        { "height" },
         { NULL }
     };
 
-static const void (*fun[])(const char *line,
+static const void (*fun[])(setting_t *setting,
     char *id, level_t *level, FILE *file) =
     {
     name_to_lvl,
@@ -31,22 +33,25 @@ static const void (*fun[])(const char *line,
     map_to_lvl,
     song_to_lvl,
     csv_to_lvl,
-    tile_to_lvl
+    tile_to_lvl,
+    w_h_to_lvl,
+    w_h_to_lvl,
     };
 
-static void load_level_line(const char *line, level_t *level, FILE *file)
+static void load_level_line(const char *line, setting_t *setting,
+    level_t *level, FILE *file)
 {
     char *cpy = my_strdup(line);
     char *id = my_strtok(cpy, ":");
 
     for (int i = 0; identifiers[i].name != NULL; i++) {
         if (my_strcmp(identifiers[i].name, id) == 0) {
-            return (*fun[i])(line, id, level, file);
+            return (*fun[i])(setting, id, level, file);
         }
     }
 }
 
-level_t *load_level(const char *path)
+level_t *load_level(const char *path, setting_t *setting)
 {
     ssize_t gtl = 1;
     char *buf = NULL;
@@ -59,13 +64,11 @@ level_t *load_level(const char *path)
     res->csv = NULL;
     res->name = NULL;
     res->texture = NULL;
+    res->height = 0;
+    res->width = 0;
     res->tile = NULL;
     while ((gtl = getline(&buf, &x, file)) > -1) {
-        load_level_line(buf, res, file);
-    }
-    if (res->csv != NULL && res->texture != NULL) {
-        res->tile = create_tile(res->csv, res->texture);
-        my_printf("tile non null\n");
+        load_level_line(buf, setting, res, file);
     }
     res->next = NULL;
     fclose(file);

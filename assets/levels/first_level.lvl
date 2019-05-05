@@ -1,0 +1,8 @@
+name: first_level
+texture: tilesheet.png
+csv:
+first_level_Sol.csv
+first_level_Murs.csv
+first_level_Meubles.csv
+first_level_Objets.csv
+endcsv

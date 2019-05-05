@@ -57,6 +57,9 @@ void display(setting_t *setting, graphic_t *graphic)
         case(CHOOSE_SCREEN):
             display_charracters(setting, graphic);
             break;
+        case (TEST_LVL):
+            display_level(setting->curr_lvl, setting);
+            break;
         default:
             break;
     }

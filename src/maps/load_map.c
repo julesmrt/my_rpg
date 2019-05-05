@@ -91,19 +91,24 @@ static int amnt_layers(char **csv)
     while (csv[i] != NULL) {
         i++;
     }
+    my_printf("Layers: %d\n", i);
     return i;
 }
 
-tiles_t *create_tile(char **csv, sfTexture *texture)
+tiles_t *create_tile(char **csv, level_t *level)
 {
     tiles_t *tile = malloc(sizeof(tiles_t));
 
-    tile->texture = texture;
+    tile->texture = level->texture;
+    if (level->texture == NULL) {
+        my_printf("Error\n");
+        return NULL;
+    }
     tile->layers = amnt_layers(csv);
     SI.x = 32;
     SI.y = 32;
-    WIDTH = 40;
-    HEIGHT = 30;
+    WIDTH = level->width;
+    HEIGHT = level->height;
     tile->t_arr = int_array(tile, csv);
     vertex(tile);
     tile->state.blendMode = sfBlendAlpha;

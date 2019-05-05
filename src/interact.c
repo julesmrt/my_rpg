@@ -93,8 +93,9 @@ void check_setting(setting_t *setting, graphic_t *graphic)
         case(HOW_TO_PLAY):
             break;
         case(PLAY):
-            setting->screen = CHOOSE_SCREEN;
             setting->setting = -1;
+            setting->curr_lvl = get_level(setting, "test");
+            setting->screen = TEST_LVL;
             break;
     }
 }

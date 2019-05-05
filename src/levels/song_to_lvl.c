@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void song_to_lvl(const char *line, char *id, level_t *level, FILE *file)
+void song_to_lvl(setting_t *setting, char *id, level_t *level, FILE *file)
 {
 
 }
