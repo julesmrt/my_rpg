@@ -106,8 +106,9 @@ typedef struct hero {
     unsigned int health;
     unsigned int attack;
     unsigned int mana;
-    sfVector2i *spawn;
+    sfVector2f *spawn;
     sfTexture *texture;
+    sfSprite *sprite;
 } hero_t;
 
 typedef struct fight {
@@ -201,6 +202,7 @@ hero_t *load_hero(setting_t *setting);
 
 setting_t *init_setting(void);
 
+void display_player(setting_t *setting);
 void move_left(setting_t *setting);
 void check_quit(setting_t *setting);
 void menu_music(setting_t *setting);
@@ -237,7 +239,7 @@ texture_t *create_texture(void);
 
 sfView *camera(setting_t *setting);
 
-sfVector2i *get_spawn(level_t *level);
+sfVector2f *get_spawn(level_t *level);
 
 graphic_t *init_graphic(setting_t *setting);
 
