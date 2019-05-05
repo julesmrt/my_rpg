@@ -11,7 +11,7 @@
 hero_t *load_hero(setting_t *setting)
 {
     hero_t *hero = malloc(sizeof(hero_t));
-    sfIntRect rect = { 0, 0, 64, 64};
+    sfIntRect rect = { 0, 64 * 6, 64, 64};
 
     if (setting->type_hero == 1)
         hero->texture = get_texture("char1", setting);

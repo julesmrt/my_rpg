@@ -16,6 +16,16 @@
 #include "my_rpg.h"
 #include "my.h"
 
+static void load_stuff(setting_t *setting)
+{
+    setting->musics = load_songs(get_config("songs", setting));
+    setting->textures = load_textures(get_config("textures", setting));
+    setting->type_hero = -1;
+    setting->levels = load_levels(setting);
+    setting->camera = camera(setting);
+    setting->clock = sfClock_create();
+}
+
 setting_t *init_setting(void)
 {
     setting_t *setting = malloc(sizeof(setting_t));
@@ -31,13 +41,9 @@ setting_t *init_setting(void)
     setting->setting = -1;
     setting->vertical = sfFalse;
     sfRenderWindow_setVerticalSyncEnabled(setting->renderWindow, setting->vertical);
+    sfRenderWindow_setFramerateLimit(setting->renderWindow, 60);
     setting->fps = 60.0;
     setting->music = sfTrue;
-    setting->musics = load_songs(get_config("songs", setting));
-    setting->textures = load_textures(get_config("textures", setting));
-    setting->type_hero = -1;
-    setting->levels = load_levels(setting);
-    setting->camera = camera(setting);
-    setting->clock = sfClock_create();
+    load_stuff(setting);
     return setting;
 }

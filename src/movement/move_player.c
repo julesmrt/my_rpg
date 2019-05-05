@@ -31,5 +31,4 @@ void move_player(setting_t *setting, sfKeyCode code)
         default: return;
     }
     sfSprite_move(setting->hero->sprite, direction);
-    printf("x: %f, y: %f, move * deltatime: %f\n", sfSprite_getPosition(setting->hero->sprite).x, sfSprite_getPosition(setting->hero->sprite).y, MOVE * deltatime);
 }
