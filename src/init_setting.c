@@ -38,5 +38,6 @@ setting_t *init_setting(void)
     setting->type_hero = -1;
     setting->levels = load_levels(setting);
     setting->camera = camera(setting);
+    setting->clock = sfClock_create();
     return setting;
 }

@@ -66,5 +66,6 @@ void display(setting_t *setting, graphic_t *graphic, fight_t *fight)
         default:
             break;
     }
+    sfClock_restart(setting->clock);
     sfRenderWindow_display(setting->renderWindow);
 }

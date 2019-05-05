@@ -1,0 +1,12 @@
+name: second_level
+texture: tilesheet.png
+width: 100
+height: 100
+csv:
+second_level_Sols.csv
+second_level_Murs.csv
+second_level_Meubles.csv
+second_level_Meubles 2.csv
+second_level_Objets.csv
+endcsv
+tile: yes

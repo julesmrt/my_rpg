@@ -109,6 +109,8 @@ typedef struct hero {
     sfVector2f *spawn;
     sfTexture *texture;
     sfSprite *sprite;
+    sfClock *clock;
+    sfTime *deltatime;
 } hero_t;
 
 typedef struct fight {
@@ -163,6 +165,7 @@ typedef struct setting {
     sfRenderWindow *renderWindow;
     int scrwidth;
     int scrheight;
+    sfClock *clock;
     sfEvent events;
     int option;
     int screen;

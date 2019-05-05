@@ -8,24 +8,28 @@
 #include "my.h"
 #include "my_rpg.h"
 
+static const float MOVE = 64.0f;
 void move_player(setting_t *setting, sfKeyCode code)
 {
-    sfVector2f old_pos = sfSprite_getPosition(setting->hero->sprite);
+    sfTime time = sfClock_getElapsedTime(setting->clock);
+    float deltatime = sfTime_asSeconds(time) * MOVE;
+    sfVector2f direction = { 0.f, 0.f };
 
     switch (code) {
         case sfKeyLeft:
-            old_pos.x -= 32;
+            direction.x -= MOVE * deltatime;
             break;
         case sfKeyRight:
-            old_pos.x += 32;
+            direction.x += MOVE * deltatime;
             break;
         case sfKeyUp:
-            old_pos.y -= 32;
+            direction.y -= MOVE * deltatime;
             break;
         case sfKeyDown:
-            old_pos.y += 32;
+            direction.y += MOVE * deltatime;
             break;
         default: return;
     }
-    sfSprite_setPosition(setting->hero->sprite, old_pos);
+    sfSprite_move(setting->hero->sprite, direction);
+    printf("x: %f, y: %f, move * deltatime: %f\n", sfSprite_getPosition(setting->hero->sprite).x, sfSprite_getPosition(setting->hero->sprite).y, MOVE * deltatime);
 }

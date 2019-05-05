@@ -3,5 +3,6 @@ texture: tilesheet.png
 csv:
 try_bottom.csv
 endcsv
-width: 15
-height: 15
+width: 100
+height: 100
+tile: yes

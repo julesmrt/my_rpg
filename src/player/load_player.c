@@ -21,6 +21,7 @@ hero_t *load_hero(setting_t *setting)
     hero->health = 100;
     hero->mana = 100;
     hero->spawn = get_spawn(setting->curr_lvl);
+    hero->clock = sfClock_create();
     hero->sprite = sfSprite_create();
     sfSprite_setTexture(hero->sprite, hero->texture, sfFalse);
     sfSprite_setTextureRect(hero->sprite, rect);
