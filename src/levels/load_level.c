@@ -19,6 +19,8 @@ static const level_identifier_t identifiers[] =
         { "song" },
         { "csv" },
         { "tile" },
+        { "width" },
+        { "height" },
         { NULL }
     };
 
@@ -31,7 +33,9 @@ static const void (*fun[])(const char *line,
     map_to_lvl,
     song_to_lvl,
     csv_to_lvl,
-    tile_to_lvl
+    tile_to_lvl,
+    w_h_to_lvl,
+    w_h_to_lvl,
     };
 
 static void load_level_line(const char *line, level_t *level, FILE *file)
@@ -63,8 +67,8 @@ level_t *load_level(const char *path)
     while ((gtl = getline(&buf, &x, file)) > -1) {
         load_level_line(buf, res, file);
     }
-    if (res->csv != NULL && res->texture != NULL) {
-        res->tile = create_tile(res->csv, res->texture);
+    if (res->csv != NULL && res->texture != NULL && my_strcmp(res->name, "test") == 0) {
+        res->tile = create_tile(res->csv, res);
         my_printf("tile non null\n");
     }
     res->next = NULL;

@@ -16,5 +16,5 @@ void tile_to_lvl(const char *line, char *id, level_t *level, FILE *file)
         level->tile = NULL;
         return;
     }
-    level->tile = create_tile(level->csv, level->texture);
+    level->tile = create_tile(level->csv, level);
 }

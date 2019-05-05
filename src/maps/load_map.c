@@ -66,7 +66,9 @@ static void vertex(tiles_t *tile)
 {
     tile->array = malloc(sizeof(sfVertexArray *) * LAYERS);
 
-    for (int i = 0; i < LAYERS; i++) {
+    for (int i = 0; tile->array != NULL && i < LAYERS; i++) {
+        if (tile->array[i] == NULL)
+            continue;
         tile->array[i] = sfVertexArray_create();
         sfVertexArray_setPrimitiveType(tile->array[i], sfQuads);
         sfVertexArray_resize(tile->array[i], WIDTH * HEIGHT * 4);
@@ -91,19 +93,24 @@ static int amnt_layers(char **csv)
     while (csv[i] != NULL) {
         i++;
     }
+    my_printf("Layers: %d\n", i);
     return i;
 }
 
-tiles_t *create_tile(char **csv, sfTexture *texture)
+tiles_t *create_tile(char **csv, level_t *level)
 {
     tiles_t *tile = malloc(sizeof(tiles_t));
 
-    tile->texture = texture;
+    tile->texture = level->texture;
+    if (level->texture == NULL) {
+        my_printf("Error\n");
+        return NULL;
+    }
     tile->layers = amnt_layers(csv);
     SI.x = 32;
     SI.y = 32;
-    WIDTH = 40;
-    HEIGHT = 30;
+    WIDTH = level->width;
+    HEIGHT = level->height;
     tile->t_arr = int_array(tile, csv);
     vertex(tile);
     tile->state.blendMode = sfBlendAlpha;

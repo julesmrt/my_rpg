@@ -54,7 +54,7 @@ void display(setting_t *setting, graphic_t *graphic)
             display_menu(setting, graphic, 3);
             check_sound(setting, graphic);
             break;
-        case(PLAY_SCREEN):
+        case(CHOOSE_SCREEN):
             display_charracters(setting, graphic);
             break;
         case (TEST_LVL):
