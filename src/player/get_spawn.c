@@ -24,7 +24,7 @@ sfVector2f *get_spawn(level_t *level)
     while (j < TILE->height * TILE->width * 4) {
         if (level->tile->t_arr[i][j] == 553) {
             x = (i + j * TILE->width) * 4;
-            quad = sfVertexArray_getVertex(TILE->array[i], x);
+//            quad = sfVertexArray_getVertex(TILE->array[i], x);
 //            pos->x = quad[0].position.x;
 //            pos->y = quad[0].position.y;
             break;
